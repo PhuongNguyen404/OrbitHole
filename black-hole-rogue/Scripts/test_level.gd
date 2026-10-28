@@ -6,6 +6,9 @@ func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color("100c20"))
 	_build_tiles()
 	_build_hud()
+	var core = preload("res://Scripts/practice_core.gd").new()
+	core.position = Vector2(760,398)
+	add_child(core)
 	queue_redraw()
 
 func _build_tiles() -> void:
@@ -63,11 +66,11 @@ func _build_hud() -> void:
 	var panel := ColorRect.new()
 	panel.color = Color(0.045,0.03,0.08,0.91)
 	panel.position = Vector2(20,18)
-	panel.size = Vector2(570,94)
+	panel.size = Vector2(700,118)
 	canvas.add_child(panel)
 	var label := Label.new()
 	label.position = Vector2(36,26)
-	label.text = "O R B I T B R E A K   /   VOID CONSTRUCT\nA / D  MOVE     SPACE  JUMP     SHIFT  SPRINT     J  DASH\nPHASE 01  •  movement laboratory  /  falls reset automatically"
+	label.text = "O R B I T B R E A K   /   VOID CONSTRUCT\nA / D  MOVE     SPACE  JUMP     SHIFT  SPRINT     J  DASH\nK / LEFT CLICK  PUNCH → PUNCH → KICK   •   tap to chain\nHold SPACE for higher jumps  /  falls reset automatically"
 	label.add_theme_font_size_override("font_size",16)
 	label.add_theme_color_override("font_color",Color("e5d4ff"))
 	canvas.add_child(label)

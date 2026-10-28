@@ -18,7 +18,7 @@ func frames(count: int) -> void:
 		await physics_frame
 
 func reset_at(point := Vector2(160,448)) -> void:
-	for action in ["move_left","move_right","jump","sprint","dash"]:
+	for action in ["move_left","move_right","jump","sprint","dash","attack"]:
 		Input.action_release(action)
 	player.respawn()
 	player.global_position = point
@@ -62,7 +62,7 @@ func run() -> void:
 	Input.action_press("move_right")
 	await frames(30)
 	Input.action_press("jump")
-	await frames(90)
+	await frames(125)
 	Input.action_release("jump")
 	Input.action_release("move_right")
 	check(player.position.x > 1040 and player.is_on_floor(),"running jump crosses the gap and lands")

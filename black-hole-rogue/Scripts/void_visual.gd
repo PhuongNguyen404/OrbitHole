@@ -4,7 +4,7 @@ extends Node2D
 const MASTER := preload("res://Assets/VoidConstruct/void_construct.png")
 const PIXEL_SCALE := 80.0 / 1536.0
 const FOOT_ORIGIN := Vector2(512, 1435)
-const RATES := {"IDLE": 8.0, "RUN": 12.0, "SPRINT": 14.0, "JUMP": 8.0, "FALL": 8.0, "DASH": 14.0}
+const RATES := {"IDLE": 8.0, "RUN": 12.0, "SPRINT": 14.0, "JUMP": 8.0, "FALL": 8.0, "DASH": 14.0, "ATTACK": 24.0}
 
 var state := "IDLE":
 	set(value):
@@ -22,6 +22,13 @@ var fragments: Array[Polygon2D] = []
 var fragment_homes: Array[Vector2] = []
 var sampled_rotations: Dictionary = {}
 var head_ring: Line2D
+var attack_stage := 0
+var attack_progress := -1.0
+var landing_left := 0.0
+var landing_weight := 0.0
+var motion_velocity := Vector2.ZERO
+var previous_velocity := Vector2.ZERO
+var body_drag := Vector2.ZERO
 
 func _ready() -> void:
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
@@ -105,9 +112,14 @@ func _build_fragments() -> void:
 func _process(delta: float) -> void:
 	animation_time += delta
 	orbit_time += delta
-	var sampled: float = floorf(animation_time * RATES[state]) / RATES[state]
-	var orbit_sample := floorf(orbit_time * 8.0) / 8.0
-	var phase := sampled * TAU * (2.0 if state == "SPRINT" else 1.5)
+	# Continuous motion with delayed secondary parts replaces clockwork stepping.
+	var sampled: float = animation_time
+	landing_left = maxf(0.0, landing_left - delta)
+	var acceleration := (motion_velocity - previous_velocity) / maxf(delta,0.001)
+	previous_velocity = motion_velocity
+	body_drag = body_drag.lerp(Vector2(clampf(-acceleration.x * facing * 0.0004,-1.5,1.5),0),1.0-exp(-delta*8.0))
+	var orbit_sample := orbit_time
+	var phase: float = sampled * TAU * (float(RATES[state]) / 8.0 if state in ["RUN","SPRINT"] else 1.5)
 	var gait := sin(phase)
 	var running := state == "RUN" or state == "SPRINT"
 	var pose := {"hips": 0.0,"chest": 0.0,"head": 0.0,
@@ -120,16 +132,16 @@ func _process(delta: float) -> void:
 	if running:
 		var stride := 0.62 if state == "RUN" else 0.9
 		pose["hips"] = 0.06 if state == "RUN" else 0.16
-		pose["chest"] = 0.05 if state == "RUN" else 0.12
-		pose["head"] = -0.08
-		pose["thigh_front"] = gait * stride
-		pose["thigh_back"] = -gait * stride
-		pose["shin_front"] = -maxf(0.0,gait) * 0.9
-		pose["shin_back"] = -maxf(0.0,-gait) * 0.9
+		pose["chest"] = (0.05 if state == "RUN" else 0.12) + sin(phase-0.4)*0.06
+		pose["head"] = -0.08 + sin(phase-0.8)*0.035
+		pose["thigh_front"] = gait * stride * 0.85
+		pose["thigh_back"] = -gait * stride * 0.85
+		pose["shin_front"] = -pow(maxf(0.0,sin(phase-0.45)),1.5) * 1.15
+		pose["shin_back"] = -pow(maxf(0.0,-sin(phase-0.45)),1.5) * 1.15
 		pose["foot_front"] = -gait * 0.25
 		pose["foot_back"] = gait * 0.25
-		pose["arm_front"] = -gait * stride * 0.85
-		pose["arm_back"] = gait * stride * 0.85
+		pose["arm_front"] = -sin(phase-0.22) * stride * 0.75
+		pose["arm_back"] = sin(phase-0.22) * stride * 0.75
 		pose["forearm_front"] = -0.3 - maxf(0.0,-gait) * 0.55
 		pose["forearm_back"] = -0.3 - maxf(0.0,gait) * 0.55
 		hip_offset.y = -absf(cos(phase)) * 1.5
@@ -160,26 +172,47 @@ func _process(delta: float) -> void:
 		pose["arm_front"] = sin(orbit_sample * 1.5) * 0.025
 		pose["arm_back"] = -sin(orbit_sample * 1.5) * 0.025
 		pose["head"] = -pose["chest"]
+	if state == "ATTACK" and attack_progress >= 0.0:
+		pose = _combat_pose(pose)
+		separation = _strike_envelope() * 2.0
+		# Compress toward the black hole, then let the stones overshoot the strike.
+		hip_offset.x += _strike_envelope() * (3.5 if attack_stage == 2 else 2.0)
+	var landing := sin((1.0 - landing_left / 0.20) * PI) * landing_weight if landing_left > 0.0 else 0.0
+	hip_offset.y += landing * 2.0
+	pose["shin_front"] -= landing * 0.16
+	pose["shin_back"] -= landing * 0.12
 	sampled_rotations = pose
 	# Blend state changes while the gait itself is sampled at its declared rate.
 	var blend := 1.0 - exp(-delta * 24.0)
 	for id in bones:
 		var joint: Node2D = bones[id]
-		joint.rotation = lerp_angle(joint.rotation, pose[id], blend)
+		var response := 26.0 if state == "ATTACK" else 18.0
+		if id.begins_with("hand") or id == "head":
+			response *= 0.72
+		joint.rotation = lerp_angle(joint.rotation, pose[id], 1.0-exp(-delta*response))
 		var target: Vector2 = anchors[id]
 		if id == "hips":
-			target += hip_offset
+			target += hip_offset + body_drag
 		elif id == "chest" or id == "head":
 			target.y -= separation + sin(orbit_sample * 1.8) * (0.4 if id == "chest" else 0.8)
+		elif id.begins_with("hand") and state == "ATTACK":
+			target.x += _strike_envelope() * 1.8
 		elif id.begins_with("arm"):
 			target.x -= 0.8 if state == "SPRINT" else 0.0
 		joint.position = joint.position.lerp(target, blend)
+		if id == "head":
+			var pulse := 1.0 + (sin(clampf(attack_progress,0,1) * PI) * 0.07 if state == "ATTACK" else 0.0)
+			joint.scale = joint.scale.lerp(Vector2.ONE * pulse,blend)
 	rig.scale.x = facing
 	_plant_feet(blend)
 	for i in range(fragments.size()):
 		var phase_offset := orbit_sample * 1.6 + i * 1.4
 		var drift := Vector2(sin(phase_offset) * 1.5,cos(phase_offset) * 2.0)
-		if state == "FALL":
+		if state == "ATTACK" and attack_progress >= 0.0:
+			var compression := 1.0 - smoothstep(0.0,0.3,attack_progress)
+			drift -= fragment_homes[i] * Vector2(0.25,0.02) * compression
+			drift.x += _strike_envelope() * (5.0 if i % 2 == 0 else 2.0)
+		elif state == "FALL":
 			drift.y -= 3.0
 		elif state == "DASH" or state == "SPRINT":
 			drift.x -= 5.0 if state == "DASH" else 2.0
@@ -190,11 +223,12 @@ func _process(delta: float) -> void:
 		var angle := orbit_sample * 1.1 + i * 0.13
 		ring_points.append(Vector2(cos(angle) * 10.0, sin(angle) * 3.5).rotated(0.43))
 	head_ring.points = ring_points
+	queue_redraw()
 
 func _plant_feet(blend: float) -> void:
 	# Keep the lower foot at the body's baseline during grounded locomotion.
 	# The collision shape lives on Player, outside this visual hierarchy.
-	if state != "IDLE" and state != "RUN" and state != "SPRINT":
+	if state not in ["IDLE","RUN","SPRINT","ATTACK"] or (state == "ATTACK" and not _grounded()):
 		rig.position.y = lerpf(rig.position.y, 0.0, blend)
 		return
 	var lowest := -INF
@@ -214,7 +248,81 @@ func afterimage() -> void:
 	get_tree().current_scene.add_child(ghost)
 	ghost.global_transform = rig.global_transform
 	ghost.modulate = Color(0.65,0.25,1.0,0.40)
-	ghost.z_index = -5
+	ghost.z_index = 15 # Above scenery, below the player; no limb can fall behind buildings.
 	var tween := ghost.create_tween()
 	tween.tween_property(ghost,"modulate:a",0.0,0.20)
 	tween.tween_callback(ghost.queue_free)
+
+func _grounded() -> bool:
+	var character := get_parent() as CharacterBody2D
+	return character != null and character.is_on_floor()
+
+func land(speed: float) -> void:
+	landing_left = 0.20
+	landing_weight = clampf(speed / 650.0,0.25,1.0)
+
+func _strike_envelope() -> float:
+	var u := clampf(attack_progress,0.0,1.0)
+	if u < 0.28:
+		return -sin(u / 0.28 * PI * 0.5) * 0.35
+	if u < 0.46:
+		return lerpf(-0.35,1.0,1.0-pow(1.0-(u-0.28)/0.18,3))
+	return lerpf(1.0,0.0,smoothstep(0.46,1.0,u))
+
+func _combat_pose(base: Dictionary) -> Dictionary:
+	# Anticipation -> explosive extension -> follow-through -> gravitational recall.
+	var wind := {"hips":-0.08,"chest":-0.20,"head":0.18,
+		"arm_front":0.45,"forearm_front":-1.6,"hand_front":-0.2,
+		"arm_back":-0.45,"forearm_back":-1.1,
+		"thigh_front":-0.2,"shin_front":-0.2,"thigh_back":0.15}
+	var strike := {"hips":0.12,"chest":0.23,"head":-0.28,
+		"arm_front":-1.6,"forearm_front":0.15,"hand_front":0.15,
+		"arm_back":0.5,"forearm_back":-1.3,
+		"thigh_front":-0.16,"shin_front":-0.15,"thigh_back":0.14}
+	if attack_stage == 1:
+		wind.merge({"chest":0.20,"head":-0.12,"arm_back":0.7,"forearm_back":-1.7},true)
+		strike.merge({"chest":-0.12,"head":0.12,"arm_front":0.2,"forearm_front":-1.7,
+			"arm_back":-1.65,"forearm_back":0.2,"hand_back":0.1},true)
+	elif attack_stage == 2:
+		wind.merge({"hips":-0.12,"chest":0.16,"thigh_front":-0.85,"shin_front":-1.4,
+			"arm_front":-0.5,"forearm_front":-0.8},true)
+		strike.merge({"hips":-0.05,"chest":-0.24,"head":0.15,
+			"arm_front":0.7,"forearm_front":-0.8,"arm_back":-0.6,"forearm_back":-1.0,
+			"thigh_front":-1.65,"shin_front":0.1,"foot_front":0.7,
+			"thigh_back":0.04,"shin_back":-0.12},true)
+	var u := clampf(attack_progress,0,1)
+	for id in base:
+		var neutral: float = base[id]
+		var pulled: float = wind.get(id,neutral)
+		var extended: float = strike.get(id,neutral)
+		if u < 0.28:
+			base[id] = lerp_angle(neutral,pulled,smoothstep(0.0,0.28,u))
+		elif u < 0.46:
+			base[id] = lerp_angle(pulled,extended,1.0-pow(1.0-(u-0.28)/0.18,3))
+		else:
+			base[id] = lerp_angle(extended,neutral,smoothstep(0.55,1.0,u))
+	return base
+
+func _draw() -> void:
+	if state != "ATTACK" or attack_progress < 0.0:
+		return
+	var u := clampf(attack_progress,0,1)
+	var center := Vector2(0,-48)
+	# Inward corkscrews make the windup read as a singularity gathering its body.
+	if u < 0.35:
+		for i in range(9):
+			var angle := i * TAU / 9.0 + u * 11.0
+			var radius := lerpf(40.0,7.0,u / 0.35)
+			var point := center + Vector2(cos(angle)*radius*facing,sin(angle)*radius*0.65)
+			var tail := center + Vector2(cos(angle-0.2)*(radius+5)*facing,sin(angle-0.2)*(radius+5)*0.65)
+			draw_line(tail,point,Color(0.7,0.35,1.0,0.65),1.0)
+	if u >= 0.30 and u < 0.72:
+		var fade := 1.0-smoothstep(0.46,0.72,u)
+		var impact := Vector2((42 if attack_stage == 2 else 33)*facing,-30 if attack_stage == 2 else -47)
+		draw_circle(impact,3.0,Color(0.03,0.01,0.06,fade))
+		draw_arc(impact,6.0+(u-0.30)*24.0,0,TAU,24,Color(0.8,0.4,1.0,fade),1.0)
+		var arc := PackedVector2Array()
+		for i in range(15):
+			var angle := -1.0+i/14.0*1.9
+			arc.append(Vector2(cos(angle)*(48 if attack_stage==2 else 38)*facing,-39+sin(angle)*22))
+		draw_polyline(arc,Color(0.72,0.3,1.0,fade*0.8),1.5)
