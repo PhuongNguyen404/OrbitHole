@@ -60,7 +60,7 @@ func run() -> void:
 	Input.action_release("attack")
 	await prepare()
 	await tap()
-	for expected in range(3):
+	for expected in range(2):
 		for i in range(100):
 			if combat.stage==expected and combat.progress>=.50:
 				break
@@ -73,10 +73,10 @@ func run() -> void:
 				break
 			await frames(1)
 	await wait_stage_end()
-	check(starts==[0,1,2,3],"four timed presses play jab sweep reversal and headbutt without skipping")
-	check(dummy.damage_log==[8,10,16,28] and dummy.health==98,"all four Area2D shapes apply their own damage exactly once")
+	check(starts==[0,1,2],"three timed presses play gravity jab, repulsion sweep and headbutt without skipping")
+	check(dummy.damage_log==[8,12,28] and dummy.health==112,"all three Area2D shapes apply their own damage exactly once")
 	check(not combat.active and player.get_node("AttackHitbox/CollisionShape2D").disabled,"hitbox closes during recovery")
-	check(player.visual.bones["head"].position.distance_to(player.visual.anchors["head"])<1.0,"head reforms after headbutt")
+	check(not player.visual.attacking,"complete-character attack playback finishes after headbutt")
 	await frames(4)
 	check(player.state==player.State.IDLE,"combo returns cleanly to idle")
 	await prepare(false)
@@ -117,7 +117,7 @@ func run() -> void:
 	check(dummy.hitstop_left>0 or dummy.flash>0,"dummy receives impact flash and hitstop")
 	check(player.shake_left==0,"light hits do not shake the camera")
 	await prepare()
-	combat.start(3,1)
+	combat.start(2,1)
 	for i in range(60):
 		if dummy.hit_count>0:
 			break
@@ -136,9 +136,9 @@ func run() -> void:
 	await frames(3)
 	dummy.freeze = false
 	var start_x := dummy.position.x
-	combat.start(2,1)
+	combat.start(1,1)
 	await frames(14)
-	check(dummy.position.x<start_x,"reversal pulls the dummy toward the impact point before striking")
+	check(dummy.position.x<start_x,"repulsion sweep retains its gravity field before striking")
 	await prepare(false)
 	await tap()
 	Input.action_press("dash")
@@ -149,6 +149,30 @@ func run() -> void:
 	Input.action_press("jump")
 	await frames(3)
 	check(not combat.attacking and player.velocity.y<0,"jump remains responsive during attacks")
+	await prepare(false)
+	Input.action_press("move_right")
+	Input.action_press("sprint")
+	await frames(30)
+	await tap()
+	check(combat.stage==3 and player.visual.animation==&"sprint_attack","attack while sprinting selects the complete sprint-attack sequence")
+	await wait_stage_end()
+	await frames(10)
+	check(starts==[3],"sprint attack does not automatically chain basic moves")
+	await prepare(false)
+	Input.action_press("dash")
+	await frames(3)
+	Input.action_release("dash")
+	await tap()
+	check(combat.stage==4 and player.visual.animation==&"dash_attack","attack during the preserved dash selects dash attack")
+	await wait_stage_end()
+	await prepare(false)
+	Input.action_press("jump")
+	await frames(15)
+	await tap()
+	check(combat.stage==5 and player.visual.animation==&"airborne_smash","attack in the air selects the complete airborne-smash sequence")
+	Input.action_release("jump")
+	await wait_stage_end()
+	check(player.velocity.y>=0 or player.is_on_floor(),"airborne smash retains gravity instead of hovering")
 	await prepare()
 	var wall := StaticBody2D.new()
 	wall.collision_layer = 1
@@ -161,7 +185,7 @@ func run() -> void:
 	game.add_child(wall)
 	dummy.reset_to(Vector2(281,413))
 	await frames(5)
-	combat.start(3,1)
+	combat.start(2,1)
 	Input.action_press("move_right")
 	await frames(80)
 	Input.action_release("move_right")

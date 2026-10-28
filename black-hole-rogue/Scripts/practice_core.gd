@@ -37,18 +37,15 @@ func _ready() -> void:
 	add_child(shape)
 	art = Node2D.new()
 	add_child(art)
-	_add_art(Rect2(351,37,266,274),Vector2(0,2),.069)
-	_add_art(Rect2(63,61,208,224),Vector2(0,-18),.042)
+	_add_art()
 
-func _add_art(region: Rect2,point: Vector2,size: float) -> void:
+func _add_art() -> void:
+	# One complete drawing for the training dummy too; no disassembled atlas.
 	var sprite := Sprite2D.new()
-	var texture := AtlasTexture.new()
-	texture.atlas = preload("res://Assets/VoidConstruct/body_parts.png")
-	texture.region = region
-	sprite.texture = texture
+	sprite.texture = preload("res://Assets/VoidConstruct/Frames/idle_00.png")
 	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	sprite.position = point
-	sprite.scale = Vector2.ONE*size
+	sprite.position = Vector2(0,4)
+	sprite.scale = Vector2.ONE*0.65
 	art.add_child(sprite)
 
 func _physics_process(delta: float) -> void:

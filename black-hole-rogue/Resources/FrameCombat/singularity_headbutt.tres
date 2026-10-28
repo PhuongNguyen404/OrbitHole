@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GravityAttack" load_steps=2 format=3]
+[ext_resource type="Script" path="res://Scripts/gravity_attack.gd" id="1"]
+[resource]
+script = ExtResource("1")
+title = "SINGULARITY HEADBUTT"
+animation = &"singularity_headbutt"
+duration = 0.55
+active_start = 0.205
+active_end = 0.29
+damage = 28
+knockback = Vector2(300, -75)
+stagger = 0.32
+hitstop = 0.055
+reach = Vector2(31, -59)
+size = Vector2(42, 42)
+shape_type = 2
+pull_strength = 260
+pull_end = 0.15

@@ -47,9 +47,9 @@ func run() -> void:
 	player = game.get_node("Player")
 	core = game.get_node("TrainingDummy")
 	await frames(5)
-	for id in player.visual.bones:
-		var art: Sprite2D = player.visual.bones[id].get_node("Art")
-		check(total_z(art)>total_z(game),id+" renders ahead of background buildings")
+	var body_art: AnimatedSprite2D = player.get_node("AnimatedSprite2D")
+	check(total_z(body_art)>total_z(game),"the complete character renders ahead of background buildings")
+	check(player.scale==Vector2.ONE,"body collision parent remains unscaled")
 	# Actually jump onto each elevated slab, rather than only asserting height.
 	var jumps := [[Vector2(280,448),Vector2(336,480),352.0,25],
 		[Vector2(448,352),Vector2(576,704),272.0,70],

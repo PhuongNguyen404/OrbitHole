@@ -1,6 +1,6 @@
 class_name GravityAttack
 extends Resource
-## One attack's editable gameplay timing; clip keyframes live in gravity_melee.tres.
+## Editable gameplay timing; animation names select complete SpriteFrames drawings.
 @export var title := ""
 @export var animation: StringName
 @export_range(0.1,2.0) var duration := 0.28

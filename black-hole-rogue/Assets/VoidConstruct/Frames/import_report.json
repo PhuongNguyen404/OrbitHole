@@ -1,0 +1,808 @@
+{
+	"animations": {
+		"airborne_smash": {
+			"count": 6,
+			"fps": 18.0,
+			"frame_sha256": [
+				"d3b58c47542b1e72dd7490980609fb965719bebbb02e6d590b81758a63ce9c19",
+				"97036515230e2aefeb045ca1dab043136426859a4131f63af2b932a6e97138aa",
+				"b309fc503d8460eb48532f5ae9059ba0e088f569ae1d5d84a14ac7014f161a64",
+				"e0d909fee4570516e5ad7ad6dabbb0d43e76cf16a8137aa353a726ea4b52613f",
+				"5274aba07dc61ee2dbefbc09c5474305871a27b4a38463559a194830e1bfe9f6",
+				"cc262e7dad51d218778ea9ac59090d20625d0a2ea396138607a144bea8c54f80"
+			],
+			"frames": [
+				"res://Assets/VoidConstruct/Frames/airborne_smash_00.png",
+				"res://Assets/VoidConstruct/Frames/airborne_smash_01.png",
+				"res://Assets/VoidConstruct/Frames/airborne_smash_02.png",
+				"res://Assets/VoidConstruct/Frames/airborne_smash_03.png",
+				"res://Assets/VoidConstruct/Frames/airborne_smash_04.png",
+				"res://Assets/VoidConstruct/Frames/airborne_smash_05.png"
+			],
+			"loop": false,
+			"reference_height": 528.0,
+			"source_bounds": [
+				[
+					11,
+					11,
+					417,
+					389
+				],
+				[
+					12,
+					11,
+					306,
+					528
+				],
+				[
+					0,
+					10,
+					238,
+					433
+				],
+				[
+					4,
+					11,
+					476,
+					327
+				],
+				[
+					11,
+					11,
+					332,
+					311
+				],
+				[
+					12,
+					11,
+					256,
+					437
+				]
+			],
+			"sources": [
+				"res://Assets/VoidConstruct/FrameSources/airborne_smash_source.png"
+			],
+			"uniform_scale": 0.151515151515152
+		},
+		"dash": {
+			"count": 6,
+			"fps": 14.0,
+			"frame_sha256": [
+				"869d2e8959c24b4b6755f4cbe111f75afad9357f41f76434839f3f538e9111a5",
+				"d3bf47ac5b98318ea9ee12c83915bf7a8e1a19812556e12dc347ffb4862507b4",
+				"fe2f2a1ad01315cc4812e66a6e57d23a53bdd018b984964d74ba7a7ad98c3411",
+				"f4687bf4e6191ba5276832ef3383d5c09e818c120e88f8031953a6b5b1e80f3d",
+				"7d6a6e680538c4e90c1d7433a51e5cabc343465968e18f14fe5eea52cd4f8881",
+				"6da9bb298788b443e39b0268cd3df1068368c30521d73d07361b7e439d44fa3a"
+			],
+			"frames": [
+				"res://Assets/VoidConstruct/Frames/dash_00.png",
+				"res://Assets/VoidConstruct/Frames/dash_01.png",
+				"res://Assets/VoidConstruct/Frames/dash_02.png",
+				"res://Assets/VoidConstruct/Frames/dash_03.png",
+				"res://Assets/VoidConstruct/Frames/dash_04.png",
+				"res://Assets/VoidConstruct/Frames/dash_05.png"
+			],
+			"loop": false,
+			"reference_height": 408.0,
+			"source_bounds": [
+				[
+					12,
+					0,
+					439,
+					327
+				],
+				[
+					12,
+					0,
+					449,
+					361
+				],
+				[
+					0,
+					8,
+					519,
+					256
+				],
+				[
+					0,
+					11,
+					457,
+					408
+				],
+				[
+					11,
+					10,
+					476,
+					354
+				],
+				[
+					12,
+					10,
+					303,
+					408
+				]
+			],
+			"sources": [
+				"res://Assets/VoidConstruct/FrameSources/dash_source.png"
+			],
+			"uniform_scale": 0.196078431372549
+		},
+		"dash_attack": {
+			"count": 6,
+			"fps": 18.0,
+			"frame_sha256": [
+				"52ab8b4797de94099597afd0c299c00257e5fbc83ad2f4dbe3d3c3bfcfccbdc1",
+				"2ff6390283b21dd39ced4997284d8ebb8b7d1e34a49d5117a271543b1414f4a8",
+				"2a00ea37b4adaaae3e7958ba3f1b20d02059f9f3acce63ac567847843ae6a307",
+				"e9510fc209901d01b761d542e7827135ec1a95749bb6380207de6adfe1166dd8",
+				"c15c41d974dad4eed6c41edad86cb601eb667912fd3977e7a76084b9e7080144",
+				"a1b607abd711dc77ee79f9bca34fa84f120d93feef9573cdae7209a7bac18332"
+			],
+			"frames": [
+				"res://Assets/VoidConstruct/Frames/dash_attack_00.png",
+				"res://Assets/VoidConstruct/Frames/dash_attack_01.png",
+				"res://Assets/VoidConstruct/Frames/dash_attack_02.png",
+				"res://Assets/VoidConstruct/Frames/dash_attack_03.png",
+				"res://Assets/VoidConstruct/Frames/dash_attack_04.png",
+				"res://Assets/VoidConstruct/Frames/dash_attack_05.png"
+			],
+			"loop": false,
+			"reference_height": 417.0,
+			"source_bounds": [
+				[
+					12,
+					11,
+					484,
+					314
+				],
+				[
+					11,
+					11,
+					408,
+					351
+				],
+				[
+					11,
+					3,
+					495,
+					371
+				],
+				[
+					12,
+					8,
+					489,
+					379
+				],
+				[
+					11,
+					10,
+					504,
+					335
+				],
+				[
+					12,
+					11,
+					344,
+					417
+				]
+			],
+			"sources": [
+				"res://Assets/VoidConstruct/FrameSources/dash_attack_source.png"
+			],
+			"uniform_scale": 0.191846522781775
+		},
+		"fall": {
+			"count": 4,
+			"fps": 8.0,
+			"frame_sha256": [
+				"39575582b31a74d89979953354e45942fc3ffa116822e9c77ae30d681e9f94b4",
+				"6639f5a426549abfbd88215ea53da43b5f76ef26bcaa48ec720b8476538e7028",
+				"f163f87c765303ce4ecf753502af5d8cc26c35cc45041031de579d80e033f88e",
+				"bfed0f73e022196d7ccd87ca564ebbc58f3cd70453dc175ca78fe232cf1c7b07"
+			],
+			"frames": [
+				"res://Assets/VoidConstruct/Frames/fall_00.png",
+				"res://Assets/VoidConstruct/Frames/fall_01.png",
+				"res://Assets/VoidConstruct/Frames/fall_02.png",
+				"res://Assets/VoidConstruct/Frames/fall_03.png"
+			],
+			"loop": false,
+			"reference_height": 639.0,
+			"source_bounds": [
+				[
+					11,
+					10,
+					442,
+					571
+				],
+				[
+					12,
+					11,
+					446,
+					639
+				],
+				[
+					12,
+					11,
+					466,
+					591
+				],
+				[
+					11,
+					10,
+					430,
+					525
+				]
+			],
+			"sources": [
+				"res://Assets/VoidConstruct/FrameSources/fall_source.png"
+			],
+			"uniform_scale": 0.125195618153365
+		},
+		"gravity_jab": {
+			"count": 6,
+			"fps": 18.0,
+			"frame_sha256": [
+				"0b5344dae5ffcb072d7279b1df094d99709fbfb110236f13651c458ec4b44b5d",
+				"b311c106eee67addd5a72e3b8c2ac973a6eb4531bba11ffea98b3f043248a6b9",
+				"44ad8f5492546f526a8f1e7a6fd4bbf1ddf0001d540b233d2490d29f344f23d8",
+				"a9daf08218c78bb80cb377124c684646c9a9e904c8468c20472ef6dcc84fca4d",
+				"0b94897e9dfaa6181c772e67e233206fb4aeca606d906debb4f195ed24b295fb",
+				"069f34b906ff0d94078a5a3ff67959952c8618e21009576110677ee37af96114"
+			],
+			"frames": [
+				"res://Assets/VoidConstruct/Frames/gravity_jab_00.png",
+				"res://Assets/VoidConstruct/Frames/gravity_jab_01.png",
+				"res://Assets/VoidConstruct/Frames/gravity_jab_02.png",
+				"res://Assets/VoidConstruct/Frames/gravity_jab_03.png",
+				"res://Assets/VoidConstruct/Frames/gravity_jab_04.png",
+				"res://Assets/VoidConstruct/Frames/gravity_jab_05.png"
+			],
+			"loop": false,
+			"reference_height": 487.0,
+			"source_bounds": [
+				[
+					11,
+					12,
+					333,
+					484
+				],
+				[
+					12,
+					2,
+					355,
+					486
+				],
+				[
+					12,
+					0,
+					414,
+					487
+				],
+				[
+					12,
+					0,
+					502,
+					487
+				],
+				[
+					12,
+					11,
+					353,
+					477
+				],
+				[
+					11,
+					12,
+					329,
+					486
+				]
+			],
+			"sources": [
+				"res://Assets/VoidConstruct/FrameSources/gravity_jab_source.png"
+			],
+			"uniform_scale": 0.164271047227926
+		},
+		"idle": {
+			"count": 8,
+			"fps": 8.0,
+			"frame_sha256": [
+				"04a7c83ae235a7251b366ac3f82c35fc3138afb9616c66fdde12cfe2ea6b38b5",
+				"0a36c6caf9372f6a5c8bcc547677875a366326f71c36eb202d982df10f8eb08f",
+				"d19591aef24830d4e979314a8b9f79fa985c82672fb385756efa7d4966c1ab9e",
+				"2d0783618a3e28d13b95ea0f10b981df715221925e0f2be2d13f7bf24597c510",
+				"c47188e2e14433709d144b0c58ed33e33d3d275a67ad7dda6e02400110686e13",
+				"883cdc15ec3476f89cf7b1a06cbeb97d280648f335d9174b259d00536cb21de6",
+				"f037f0e4e99e873422cf9b0ed24005f02495e67851f4c005121257eb9c2adad0",
+				"e218f1fc6efc9e001c61fa2f9e9b475c0d769b560118706cf78090cdd6faad26"
+			],
+			"frames": [
+				"res://Assets/VoidConstruct/Frames/idle_00.png",
+				"res://Assets/VoidConstruct/Frames/idle_01.png",
+				"res://Assets/VoidConstruct/Frames/idle_02.png",
+				"res://Assets/VoidConstruct/Frames/idle_03.png",
+				"res://Assets/VoidConstruct/Frames/idle_04.png",
+				"res://Assets/VoidConstruct/Frames/idle_05.png",
+				"res://Assets/VoidConstruct/Frames/idle_06.png",
+				"res://Assets/VoidConstruct/Frames/idle_07.png"
+			],
+			"loop": true,
+			"reference_height": 510.0,
+			"source_bounds": [
+				[
+					86,
+					17,
+					251,
+					510
+				],
+				[
+					87,
+					17,
+					250,
+					510
+				],
+				[
+					86,
+					17,
+					251,
+					510
+				],
+				[
+					83,
+					17,
+					259,
+					510
+				],
+				[
+					87,
+					17,
+					250,
+					510
+				],
+				[
+					87,
+					17,
+					249,
+					510
+				],
+				[
+					86,
+					17,
+					251,
+					510
+				],
+				[
+					87,
+					17,
+					250,
+					510
+				]
+			],
+			"sources": [
+				"res://Assets/VoidConstruct/FrameSources/idle_source.png"
+			],
+			"uniform_scale": 0.156862745098039
+		},
+		"jump": {
+			"count": 4,
+			"fps": 10.0,
+			"frame_sha256": [
+				"09c7b345a1c5669f470e833caac9f1e598ec42f37a50ed0435ddc15d8e023f7c",
+				"ca8ff1f8c6efe9b96dd2426a5613dfe884d438232e07883e7b6adba67cb85780",
+				"25fcf6f6c8b5e04dd0982e2438d968e73492157698a2085dc6845600acd71c6d",
+				"e46891b6d4a822577d5938918cf50d3ff13d81483ae0d674215fe055d5f270ab"
+			],
+			"frames": [
+				"res://Assets/VoidConstruct/Frames/jump_00.png",
+				"res://Assets/VoidConstruct/Frames/jump_01.png",
+				"res://Assets/VoidConstruct/Frames/jump_02.png",
+				"res://Assets/VoidConstruct/Frames/jump_03.png"
+			],
+			"loop": false,
+			"reference_height": 685.0,
+			"source_bounds": [
+				[
+					43,
+					290,
+					423,
+					441
+				],
+				[
+					16,
+					51,
+					478,
+					685
+				],
+				[
+					46,
+					71,
+					455,
+					578
+				],
+				[
+					45,
+					71,
+					448,
+					450
+				]
+			],
+			"sources": [
+				"res://Assets/VoidConstruct/FrameSources/jump_source.png"
+			],
+			"uniform_scale": 0.116788321167883
+		},
+		"repulsion_sweep": {
+			"count": 6,
+			"fps": 18.0,
+			"frame_sha256": [
+				"83af976b552ba500dc267f0c08b7c7cec7b17017937920b8646ab606b7cf8bd5",
+				"51a188767aaa6b574f81769b284f4fdc339e4b1151d92535833169bac7f38f68",
+				"5f13b9f8b80732abd4716ccdd35760d63a311c50816ddae0200cf24d3fc2452b",
+				"bef9a1798084bd10ea9a97572d781174d1038eaf45655f4a59612b45d404e7e5",
+				"5ff3e7fca9d0f07e1832faf0b486a9ebb68fe59dd4e64d391a5cb81ab79d096c",
+				"139f0d578c0a4513ba8109d337f40611c547af00c7e574a1d6e0a855a9b1a9f4"
+			],
+			"frames": [
+				"res://Assets/VoidConstruct/Frames/repulsion_sweep_00.png",
+				"res://Assets/VoidConstruct/Frames/repulsion_sweep_01.png",
+				"res://Assets/VoidConstruct/Frames/repulsion_sweep_02.png",
+				"res://Assets/VoidConstruct/Frames/repulsion_sweep_03.png",
+				"res://Assets/VoidConstruct/Frames/repulsion_sweep_04.png",
+				"res://Assets/VoidConstruct/Frames/repulsion_sweep_05.png"
+			],
+			"loop": false,
+			"reference_height": 430.0,
+			"source_bounds": [
+				[
+					12,
+					11,
+					345,
+					430
+				],
+				[
+					11,
+					11,
+					368,
+					411
+				],
+				[
+					12,
+					11,
+					470,
+					406
+				],
+				[
+					11,
+					11,
+					517,
+					391
+				],
+				[
+					12,
+					10,
+					468,
+					363
+				],
+				[
+					12,
+					11,
+					334,
+					414
+				]
+			],
+			"sources": [
+				"res://Assets/VoidConstruct/FrameSources/repulsion_sweep_source.png"
+			],
+			"uniform_scale": 0.186046511627907
+		},
+		"run": {
+			"count": 8,
+			"fps": 12.0,
+			"frame_sha256": [
+				"9a021da73ad1c9845c17f66a137724aa14c8c8082769aad6f4f117082c5eee89",
+				"f2fcc1dec7163e9a98fb427757018e5a474543b6505e565d36cced52b5247dd7",
+				"ec06b5059c1a97a329dbdb7ba685bb6544785209892de10336d7287db606682c",
+				"19677ebf7c0a1f1231fad715bb750da6e807f7eb3d3b44b8aa991b21a318576b",
+				"41d73181fbd21091f8ef4215cbc390176c24023b995b037e22fb533199c3662e",
+				"9a82bb5797b9f5619b04068a487adea096a125aa1037a4327bb548b6813d8d9d",
+				"498d12e2552c31c6939a717a340b8d2aa6663515bd52f744a62da33ae049be48",
+				"90a465c8bbd54eb09cd6a6453fd7b80cb15a0d0d203758aa4a13e6a160f5aa37"
+			],
+			"frames": [
+				"res://Assets/VoidConstruct/Frames/run_00.png",
+				"res://Assets/VoidConstruct/Frames/run_01.png",
+				"res://Assets/VoidConstruct/Frames/run_02.png",
+				"res://Assets/VoidConstruct/Frames/run_03.png",
+				"res://Assets/VoidConstruct/Frames/run_04.png",
+				"res://Assets/VoidConstruct/Frames/run_05.png",
+				"res://Assets/VoidConstruct/Frames/run_06.png",
+				"res://Assets/VoidConstruct/Frames/run_07.png"
+			],
+			"loop": true,
+			"reference_height": 1346.0,
+			"source_bounds": [
+				[
+					134,
+					227,
+					802,
+					1117
+				],
+				[
+					166,
+					134,
+					771,
+					1261
+				],
+				[
+					157,
+					150,
+					737,
+					1258
+				],
+				[
+					75,
+					178,
+					912,
+					1219
+				],
+				[
+					52,
+					101,
+					950,
+					1322
+				],
+				[
+					180,
+					103,
+					673,
+					1329
+				],
+				[
+					86,
+					107,
+					909,
+					1334
+				],
+				[
+					96,
+					86,
+					896,
+					1346
+				]
+			],
+			"sources": [
+				"res://Assets/VoidConstruct/FrameSources/run_00_source.png",
+				"res://Assets/VoidConstruct/FrameSources/run_01_source.png",
+				"res://Assets/VoidConstruct/FrameSources/run_02_source.png",
+				"res://Assets/VoidConstruct/FrameSources/run_03_source.png",
+				"res://Assets/VoidConstruct/FrameSources/run_04_source.png",
+				"res://Assets/VoidConstruct/FrameSources/run_05_source.png",
+				"res://Assets/VoidConstruct/FrameSources/run_06_source.png",
+				"res://Assets/VoidConstruct/FrameSources/run_07_source.png"
+			],
+			"uniform_scale": 0.0594353640416048
+		},
+		"singularity_headbutt": {
+			"count": 6,
+			"fps": 18.0,
+			"frame_sha256": [
+				"af1e1b5cb072bb6e4dbe529ab703c78ecfc516ef76ccbd208ffc6c7d6adf7c5b",
+				"aba95957bb7126e88637cf92ece5eea74c047f635b5098ff508f4d8852e9b041",
+				"ad8b4c977ca646ad608eac4e40a08f36e43ace2d5039a5732292a423ce935877",
+				"7164059d43ff8639be66be2eb20965d96827fd2bb6516571463eb7291ccff51b",
+				"025178acb34fbec29e410f6075db5ac3df4ab65a7a9292c25347781d3a57d516",
+				"50076a0b76f1b59446061d5fcaaea6a60135f389cc02cdb0161e1d7aa53a6460"
+			],
+			"frames": [
+				"res://Assets/VoidConstruct/Frames/singularity_headbutt_00.png",
+				"res://Assets/VoidConstruct/Frames/singularity_headbutt_01.png",
+				"res://Assets/VoidConstruct/Frames/singularity_headbutt_02.png",
+				"res://Assets/VoidConstruct/Frames/singularity_headbutt_03.png",
+				"res://Assets/VoidConstruct/Frames/singularity_headbutt_04.png",
+				"res://Assets/VoidConstruct/Frames/singularity_headbutt_05.png"
+			],
+			"loop": false,
+			"reference_height": 485.0,
+			"source_bounds": [
+				[
+					11,
+					11,
+					260,
+					485
+				],
+				[
+					0,
+					11,
+					318,
+					451
+				],
+				[
+					12,
+					4,
+					482,
+					403
+				],
+				[
+					12,
+					0,
+					497,
+					455
+				],
+				[
+					0,
+					0,
+					325,
+					457
+				],
+				[
+					12,
+					12,
+					262,
+					472
+				]
+			],
+			"sources": [
+				"res://Assets/VoidConstruct/FrameSources/singularity_headbutt_source.png"
+			],
+			"uniform_scale": 0.164948453608247
+		},
+		"sprint": {
+			"count": 8,
+			"fps": 14.0,
+			"frame_sha256": [
+				"1b02493a75a69b0083187d0d769594fb728fe357c27bcc8ec51475dfbae1c61c",
+				"81aa0f114b8471aece916f84bf5da277bdc5fe0ed3cf8f163594eb23e1d25f09",
+				"47f5ac54b6f39c9e9656712f9ce964638dd6064f140f7ffe53b3d51db3d0296f",
+				"7987049bdcd11df3a060514cfd51df24affd94295753e4b7cdb47368192f0365",
+				"ee005bf145d183fd75b631baa2e163bfc1e8785bd4c2b73a72f759ea3729984f",
+				"e2dfea781bd1cabd9e3c733c41c3e7cca2e6907027ef8842ecd68174807ad7a5",
+				"fa0700324940e88c250a62606ad1cce8a0203f95ff5b21b64823351134a7a813",
+				"1144936ebd5f64e9de1c22d9d2efe4d8f34877894754298802125c8fa624b9dc"
+			],
+			"frames": [
+				"res://Assets/VoidConstruct/Frames/sprint_00.png",
+				"res://Assets/VoidConstruct/Frames/sprint_01.png",
+				"res://Assets/VoidConstruct/Frames/sprint_02.png",
+				"res://Assets/VoidConstruct/Frames/sprint_03.png",
+				"res://Assets/VoidConstruct/Frames/sprint_04.png",
+				"res://Assets/VoidConstruct/Frames/sprint_05.png",
+				"res://Assets/VoidConstruct/Frames/sprint_06.png",
+				"res://Assets/VoidConstruct/Frames/sprint_07.png"
+			],
+			"loop": true,
+			"reference_height": 1303.0,
+			"source_bounds": [
+				[
+					23,
+					204,
+					980,
+					1170
+				],
+				[
+					57,
+					148,
+					940,
+					1268
+				],
+				[
+					73,
+					145,
+					894,
+					1265
+				],
+				[
+					60,
+					155,
+					923,
+					1257
+				],
+				[
+					36,
+					174,
+					977,
+					1210
+				],
+				[
+					99,
+					120,
+					893,
+					1303
+				],
+				[
+					37,
+					204,
+					978,
+					1187
+				],
+				[
+					51,
+					144,
+					957,
+					1174
+				]
+			],
+			"sources": [
+				"res://Assets/VoidConstruct/FrameSources/sprint_00_source.png",
+				"res://Assets/VoidConstruct/FrameSources/sprint_01_source.png",
+				"res://Assets/VoidConstruct/FrameSources/sprint_02_source.png",
+				"res://Assets/VoidConstruct/FrameSources/sprint_03_source.png",
+				"res://Assets/VoidConstruct/FrameSources/sprint_04_source.png",
+				"res://Assets/VoidConstruct/FrameSources/sprint_05_source.png",
+				"res://Assets/VoidConstruct/FrameSources/sprint_06_source.png",
+				"res://Assets/VoidConstruct/FrameSources/sprint_07_source.png"
+			],
+			"uniform_scale": 0.0613967766692249
+		},
+		"sprint_attack": {
+			"count": 6,
+			"fps": 18.0,
+			"frame_sha256": [
+				"1ace2d307cd13b5c6d60ceec7cb96df3f1d90177c7cea74e696cc7208ec2c180",
+				"c4b16dd6dd687c150fbb7c52eb2ff58919b64d03ee3dbb3655e35178fdc1f94a",
+				"8afbc8030622a1935db5a0dcfc6cacb01addb8f8d317830ca086cb10c468f255",
+				"9d48027cce1fb8499f26661fb9b3af2b2f8be7d96124f8853ae389a2d3cc4658",
+				"117d538ff16b28a9b35e0ab16fd4774379b64f429f302b10edd47f6137d2e32c",
+				"52803593b5fe2bd810365b33b6f1d8608ccd5cb9e14b5f983e2f5e7bad113ad1"
+			],
+			"frames": [
+				"res://Assets/VoidConstruct/Frames/sprint_attack_00.png",
+				"res://Assets/VoidConstruct/Frames/sprint_attack_01.png",
+				"res://Assets/VoidConstruct/Frames/sprint_attack_02.png",
+				"res://Assets/VoidConstruct/Frames/sprint_attack_03.png",
+				"res://Assets/VoidConstruct/Frames/sprint_attack_04.png",
+				"res://Assets/VoidConstruct/Frames/sprint_attack_05.png"
+			],
+			"loop": false,
+			"reference_height": 420.0,
+			"source_bounds": [
+				[
+					12,
+					11,
+					444,
+					392
+				],
+				[
+					12,
+					11,
+					427,
+					372
+				],
+				[
+					12,
+					11,
+					469,
+					381
+				],
+				[
+					12,
+					0,
+					567,
+					356
+				],
+				[
+					0,
+					7,
+					468,
+					360
+				],
+				[
+					12,
+					11,
+					314,
+					420
+				]
+			],
+			"sources": [
+				"res://Assets/VoidConstruct/FrameSources/sprint_attack_source.png"
+			],
+			"uniform_scale": 0.19047619047619
+		}
+	},
+	"body_height": 80.0,
+	"foot_baseline": 104,
+	"frame_canvas": [
+		160,
+		112
+	]
+}

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GravityAttack" load_steps=2 format=3]
+[ext_resource type="Script" path="res://Scripts/gravity_attack.gd" id="1"]
+[resource]
+script = ExtResource("1")
+title = "REPULSION SWEEP"
+animation = &"repulsion_sweep"
+duration = 0.36
+active_start = 0.12
+active_end = 0.225
+damage = 12
+knockback = Vector2(110, -18)
+stagger = 0.12
+hitstop = 0.025
+reach = Vector2(37, -43)
+size = Vector2(66, 40)
+shape_type = 1
+pull_strength = 120
+pull_end = 0.14

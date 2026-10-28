@@ -27,7 +27,7 @@ var spawn_position: Vector2
 var camera_look_x := 0.0
 var shake_left := 0.0
 var shake_clock := 0.0
-@onready var visual: Node2D = $VisualRoot
+@onready var visual: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera: Camera2D = $Camera2D
 @onready var combat: Node = $Combat
 var attack_stage: int:
@@ -85,11 +85,15 @@ func _physics_process(delta: float) -> void:
 			velocity.y += gravity*2.0*delta
 		var target := direction*(sprint_speed if Input.is_action_pressed("sprint") else run_speed)
 		if combat.attacking:
-			target *= combat.movement_multiplier
+			target *= combat.movement_factor
 		var rate := acceleration if is_on_floor() else air_acceleration
 		if direction==0.0:
 			rate = deceleration if is_on_floor() else air_acceleration*.65
 		velocity.x = move_toward(velocity.x,target,rate*delta)
+	# A context smash accelerates down after its drawn anticipation; the body
+	# still uses move_and_slide and the unchanged collision shape.
+	if combat.attacking and combat.stage == 5 and combat.progress > 0.30 and not is_on_floor():
+		velocity.y = maxf(velocity.y, 360.0)
 	var was_grounded := is_on_floor()
 	landing_speed = velocity.y
 	move_and_slide()
@@ -104,10 +108,10 @@ func _physics_process(delta: float) -> void:
 
 func _update_state() -> void:
 	var next := State.IDLE
-	if dash_left>0.0:
-		next = State.DASH
-	elif combat.attacking:
+	if combat.attacking:
 		next = State.ATTACK
+	elif dash_left>0.0:
+		next = State.DASH
 	elif not is_on_floor():
 		next = State.JUMP if velocity.y<0.0 else State.FALL
 	elif absf(velocity.x)>12.0:
@@ -119,7 +123,7 @@ func _update_state() -> void:
 
 func _on_melee_hit(target: Node,index: int) -> void:
 	melee_hit.emit(target,index)
-	if index==3:
+	if index in [2,5]:
 		shake_left = .10 # Finisher confirmed hits only, never a missed swing.
 
 func _update_camera(delta: float) -> void:

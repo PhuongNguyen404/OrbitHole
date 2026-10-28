@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GravityAttack" load_steps=2 format=3]
+[ext_resource type="Script" path="res://Scripts/gravity_attack.gd" id="1"]
+[resource]
+script = ExtResource("1")
+title = "DASH ATTACK"
+animation = &"dash_attack"
+duration = 0.32
+active_start = 0.11
+active_end = 0.213
+damage = 20
+knockback = Vector2(240, -35)
+stagger = 0.18
+hitstop = 0.033
+reach = Vector2(40, -43)
+size = Vector2(55, 30)
+shape_type = 1
+pull_strength = 0
+pull_end = 0

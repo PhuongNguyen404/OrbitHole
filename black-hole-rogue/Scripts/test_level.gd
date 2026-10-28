@@ -72,7 +72,7 @@ func _build_hud() -> void:
 	canvas.add_child(panel)
 	var label := Label.new()
 	label.position = Vector2(36,26)
-	label.text = "O R B I T B R E A K   /   VOID CONSTRUCT\nA / D  MOVE     SPACE  JUMP     SHIFT  SPRINT     J  DASH\nK / LEFT CLICK  JAB → SWEEP → REVERSAL → HEADBUTT\nTap during a move to queue the next  •  hold SPACE for height"
+	label.text = "O R B I T B R E A K   /   VOID CONSTRUCT\nA / D  MOVE     SPACE  JUMP     SHIFT  SPRINT     J  DASH\nK / LEFT CLICK  JAB → SWEEP → HEADBUTT\nAttack while sprinting, dashing or airborne for special moves"
 	label.add_theme_font_size_override("font_size",16)
 	label.add_theme_color_override("font_color",Color("e5d4ff"))
 	canvas.add_child(label)
@@ -89,4 +89,4 @@ func _process(_delta: float) -> void:
 	if combat.attacking:
 		combo_readout.text = "%02d  /  %s%s" % [combat.stage+1,combat.attacks[combat.stage].title,"  •  NEXT QUEUED" if combat.queued else ""]
 	else:
-		combo_readout.text = "VOID DUMMY  •  train the four-hit sequence"
+		combo_readout.text = "VOID DUMMY  •  train the three-hit sequence"

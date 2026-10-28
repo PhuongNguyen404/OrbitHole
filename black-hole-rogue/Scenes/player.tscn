@@ -1,12 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://by4tsn7oa2ie7"]
+[gd_scene load_steps=14 format=3 uid="uid://by4tsn7oa2ie7"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1"]
-[ext_resource type="PackedScene" path="res://Scenes/void_visual.tscn" id="2"]
+[ext_resource type="Script" path="res://Scripts/full_frame_visual.gd" id="2"]
 [ext_resource type="Script" path="res://Scripts/gravity_combat.gd" id="3"]
-[ext_resource type="AnimationLibrary" path="res://Animations/gravity_melee.tres" id="4"]
-[ext_resource type="Resource" path="res://Resources/Combat/singularity_jab.tres" id="5"]
-[ext_resource type="Resource" path="res://Resources/Combat/event_horizon_sweep.tres" id="6"]
-[ext_resource type="Resource" path="res://Resources/Combat/gravity_reversal.tres" id="7"]
-[ext_resource type="Resource" path="res://Resources/Combat/collapse_headbutt.tres" id="8"]
+[ext_resource type="SpriteFrames" path="res://Animations/void_frames.tres" id="4"]
+[ext_resource type="Resource" path="res://Resources/FrameCombat/gravity_jab.tres" id="5"]
+[ext_resource type="Resource" path="res://Resources/FrameCombat/repulsion_sweep.tres" id="6"]
+[ext_resource type="Resource" path="res://Resources/FrameCombat/singularity_headbutt.tres" id="7"]
+[ext_resource type="Resource" path="res://Resources/FrameCombat/sprint_attack.tres" id="8"]
+[ext_resource type="Resource" path="res://Resources/FrameCombat/dash_attack.tres" id="9"]
+[ext_resource type="Resource" path="res://Resources/FrameCombat/airborne_smash.tres" id="10"]
+[ext_resource type="Script" path="res://Scripts/gravity_vfx.gd" id="11"]
 [sub_resource type="CapsuleShape2D" id="Body"]
 radius = 11.0
 height = 60.0
@@ -22,7 +25,12 @@ script = ExtResource("1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0,-30)
 shape = SubResource("Body")
-[node name="VisualRoot" parent="." instance=ExtResource("2")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0,-48)
+texture_filter = 1
+sprite_frames = ExtResource("4")
+animation = &"idle"
+script = ExtResource("2")
 [node name="AttackHitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
@@ -30,12 +38,13 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
 shape = SubResource("AttackShape")
 disabled = true
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {&"melee": ExtResource("4")}
-callback_mode_process = 2
+[node name="OrbitCoreContainer" type="Node2D" parent="."]
+[node name="GravityVFX" type="Node2D" parent="."]
+script = ExtResource("11")
 [node name="Combat" type="Node" parent="."]
 script = ExtResource("3")
-attacks = Array[Resource]([ExtResource("5"),ExtResource("6"),ExtResource("7"),ExtResource("8")])
+attacks = Array[Resource]([ExtResource("5"),ExtResource("6"),ExtResource("7"),ExtResource("8"),ExtResource("9"),ExtResource("10")])
+basic_combo_count = 3
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0,-80)
 position_smoothing_enabled = true

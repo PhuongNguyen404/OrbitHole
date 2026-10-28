@@ -1,0 +1,178 @@
+[gd_resource type="SpriteFrames" load_steps=75 format=3]
+
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/airborne_smash_00.png" id="frame_001"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/airborne_smash_01.png" id="frame_002"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/airborne_smash_02.png" id="frame_003"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/airborne_smash_03.png" id="frame_004"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/airborne_smash_04.png" id="frame_005"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/airborne_smash_05.png" id="frame_006"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/dash_00.png" id="frame_007"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/dash_01.png" id="frame_008"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/dash_02.png" id="frame_009"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/dash_03.png" id="frame_010"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/dash_04.png" id="frame_011"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/dash_05.png" id="frame_012"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/dash_attack_00.png" id="frame_013"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/dash_attack_01.png" id="frame_014"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/dash_attack_02.png" id="frame_015"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/dash_attack_03.png" id="frame_016"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/dash_attack_04.png" id="frame_017"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/dash_attack_05.png" id="frame_018"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/fall_00.png" id="frame_019"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/fall_01.png" id="frame_020"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/fall_02.png" id="frame_021"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/fall_03.png" id="frame_022"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/gravity_jab_00.png" id="frame_023"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/gravity_jab_01.png" id="frame_024"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/gravity_jab_02.png" id="frame_025"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/gravity_jab_03.png" id="frame_026"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/gravity_jab_04.png" id="frame_027"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/gravity_jab_05.png" id="frame_028"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/idle_00.png" id="frame_029"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/idle_01.png" id="frame_030"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/idle_02.png" id="frame_031"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/idle_03.png" id="frame_032"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/idle_04.png" id="frame_033"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/idle_05.png" id="frame_034"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/idle_06.png" id="frame_035"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/idle_07.png" id="frame_036"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/jump_00.png" id="frame_037"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/jump_01.png" id="frame_038"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/jump_02.png" id="frame_039"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/jump_03.png" id="frame_040"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/repulsion_sweep_00.png" id="frame_041"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/repulsion_sweep_01.png" id="frame_042"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/repulsion_sweep_02.png" id="frame_043"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/repulsion_sweep_03.png" id="frame_044"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/repulsion_sweep_04.png" id="frame_045"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/repulsion_sweep_05.png" id="frame_046"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/run_00.png" id="frame_047"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/run_01.png" id="frame_048"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/run_02.png" id="frame_049"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/run_03.png" id="frame_050"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/run_04.png" id="frame_051"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/run_05.png" id="frame_052"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/run_06.png" id="frame_053"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/run_07.png" id="frame_054"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/singularity_headbutt_00.png" id="frame_055"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/singularity_headbutt_01.png" id="frame_056"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/singularity_headbutt_02.png" id="frame_057"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/singularity_headbutt_03.png" id="frame_058"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/singularity_headbutt_04.png" id="frame_059"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/singularity_headbutt_05.png" id="frame_060"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_00.png" id="frame_061"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_01.png" id="frame_062"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_02.png" id="frame_063"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_03.png" id="frame_064"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_04.png" id="frame_065"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_05.png" id="frame_066"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_06.png" id="frame_067"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_07.png" id="frame_068"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_attack_00.png" id="frame_069"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_attack_01.png" id="frame_070"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_attack_02.png" id="frame_071"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_attack_03.png" id="frame_072"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_attack_04.png" id="frame_073"]
+[ext_resource type="Texture2D" path="res://Assets/VoidConstruct/Frames/sprint_attack_05.png" id="frame_074"]
+
+[resource]
+animations = [
+{"frames": [
+{"duration": 1.0, "texture": ExtResource("frame_001")},
+{"duration": 1.0, "texture": ExtResource("frame_002")},
+{"duration": 1.0, "texture": ExtResource("frame_003")},
+{"duration": 1.0, "texture": ExtResource("frame_004")},
+{"duration": 1.0, "texture": ExtResource("frame_005")},
+{"duration": 1.0, "texture": ExtResource("frame_006")}
+], "loop": false, "name": &"airborne_smash", "speed": 18.0},
+{"frames": [
+{"duration": 1.0, "texture": ExtResource("frame_007")},
+{"duration": 1.0, "texture": ExtResource("frame_008")},
+{"duration": 1.0, "texture": ExtResource("frame_009")},
+{"duration": 1.0, "texture": ExtResource("frame_010")},
+{"duration": 1.0, "texture": ExtResource("frame_011")},
+{"duration": 1.0, "texture": ExtResource("frame_012")}
+], "loop": false, "name": &"dash", "speed": 14.0},
+{"frames": [
+{"duration": 1.0, "texture": ExtResource("frame_013")},
+{"duration": 1.0, "texture": ExtResource("frame_014")},
+{"duration": 1.0, "texture": ExtResource("frame_015")},
+{"duration": 1.0, "texture": ExtResource("frame_016")},
+{"duration": 1.0, "texture": ExtResource("frame_017")},
+{"duration": 1.0, "texture": ExtResource("frame_018")}
+], "loop": false, "name": &"dash_attack", "speed": 18.0},
+{"frames": [
+{"duration": 1.0, "texture": ExtResource("frame_019")},
+{"duration": 1.0, "texture": ExtResource("frame_020")},
+{"duration": 1.0, "texture": ExtResource("frame_021")},
+{"duration": 1.0, "texture": ExtResource("frame_022")}
+], "loop": false, "name": &"fall", "speed": 8.0},
+{"frames": [
+{"duration": 1.0, "texture": ExtResource("frame_023")},
+{"duration": 1.0, "texture": ExtResource("frame_024")},
+{"duration": 1.0, "texture": ExtResource("frame_025")},
+{"duration": 1.0, "texture": ExtResource("frame_026")},
+{"duration": 1.0, "texture": ExtResource("frame_027")},
+{"duration": 1.0, "texture": ExtResource("frame_028")}
+], "loop": false, "name": &"gravity_jab", "speed": 18.0},
+{"frames": [
+{"duration": 1.0, "texture": ExtResource("frame_029")},
+{"duration": 1.0, "texture": ExtResource("frame_030")},
+{"duration": 1.0, "texture": ExtResource("frame_031")},
+{"duration": 1.0, "texture": ExtResource("frame_032")},
+{"duration": 1.0, "texture": ExtResource("frame_033")},
+{"duration": 1.0, "texture": ExtResource("frame_034")},
+{"duration": 1.0, "texture": ExtResource("frame_035")},
+{"duration": 1.0, "texture": ExtResource("frame_036")}
+], "loop": true, "name": &"idle", "speed": 8.0},
+{"frames": [
+{"duration": 1.0, "texture": ExtResource("frame_037")},
+{"duration": 1.0, "texture": ExtResource("frame_038")},
+{"duration": 1.0, "texture": ExtResource("frame_039")},
+{"duration": 1.0, "texture": ExtResource("frame_040")}
+], "loop": false, "name": &"jump", "speed": 10.0},
+{"frames": [
+{"duration": 1.0, "texture": ExtResource("frame_041")},
+{"duration": 1.0, "texture": ExtResource("frame_042")},
+{"duration": 1.0, "texture": ExtResource("frame_043")},
+{"duration": 1.0, "texture": ExtResource("frame_044")},
+{"duration": 1.0, "texture": ExtResource("frame_045")},
+{"duration": 1.0, "texture": ExtResource("frame_046")}
+], "loop": false, "name": &"repulsion_sweep", "speed": 18.0},
+{"frames": [
+{"duration": 1.0, "texture": ExtResource("frame_047")},
+{"duration": 1.0, "texture": ExtResource("frame_048")},
+{"duration": 1.0, "texture": ExtResource("frame_049")},
+{"duration": 1.0, "texture": ExtResource("frame_050")},
+{"duration": 1.0, "texture": ExtResource("frame_051")},
+{"duration": 1.0, "texture": ExtResource("frame_052")},
+{"duration": 1.0, "texture": ExtResource("frame_053")},
+{"duration": 1.0, "texture": ExtResource("frame_054")}
+], "loop": true, "name": &"run", "speed": 12.0},
+{"frames": [
+{"duration": 1.0, "texture": ExtResource("frame_055")},
+{"duration": 1.0, "texture": ExtResource("frame_056")},
+{"duration": 1.0, "texture": ExtResource("frame_057")},
+{"duration": 1.0, "texture": ExtResource("frame_058")},
+{"duration": 1.0, "texture": ExtResource("frame_059")},
+{"duration": 1.0, "texture": ExtResource("frame_060")}
+], "loop": false, "name": &"singularity_headbutt", "speed": 18.0},
+{"frames": [
+{"duration": 1.0, "texture": ExtResource("frame_061")},
+{"duration": 1.0, "texture": ExtResource("frame_062")},
+{"duration": 1.0, "texture": ExtResource("frame_063")},
+{"duration": 1.0, "texture": ExtResource("frame_064")},
+{"duration": 1.0, "texture": ExtResource("frame_065")},
+{"duration": 1.0, "texture": ExtResource("frame_066")},
+{"duration": 1.0, "texture": ExtResource("frame_067")},
+{"duration": 1.0, "texture": ExtResource("frame_068")}
+], "loop": true, "name": &"sprint", "speed": 14.0},
+{"frames": [
+{"duration": 1.0, "texture": ExtResource("frame_069")},
+{"duration": 1.0, "texture": ExtResource("frame_070")},
+{"duration": 1.0, "texture": ExtResource("frame_071")},
+{"duration": 1.0, "texture": ExtResource("frame_072")},
+{"duration": 1.0, "texture": ExtResource("frame_073")},
+{"duration": 1.0, "texture": ExtResource("frame_074")}
+], "loop": false, "name": &"sprint_attack", "speed": 18.0}
+]
