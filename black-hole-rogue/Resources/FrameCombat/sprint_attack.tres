@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GravityAttack" load_steps=2 format=3]
+[ext_resource type="Script" path="res://Scripts/gravity_attack.gd" id="1"]
+[resource]
+script = ExtResource("1")
+title = "SPRINT ATTACK"
+animation = &"sprint_attack"
+duration = 0.42
+active_start = 0.14
+active_end = 0.28
+damage = 18
+knockback = Vector2(200, -28)
+stagger = 0.16
+hitstop = 0.03
+reach = Vector2(39, -43)
+size = Vector2(52, 30)
+shape_type = 1
+pull_strength = 0
+pull_end = 0

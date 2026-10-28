@@ -1,77 +1,84 @@
-# Orbitbreak — Phase 1
+# Orbitbreak — complete-frame Void Construct
 
-Open `black-hole-rogue/project.godot` in Godot 4.6 or newer and press **F6** with `Scenes/game.tscn` open, or **F5** to run the project.
+Open `black-hole-rogue/project.godot` in Godot 4.6 or newer and press **F5** (or **fn + F5** on Mac). Allow the first asset import to finish. The project runs `Scenes/game.tscn`.
 
-From this checkout:
+## Play
+
+- **A / D** move; **Shift** sprint.
+- **Space** jumps; hold for more height. All three raised slabs are reachable.
+- **J** dashes.
+- **K / left click** attacks. Tap during a basic attack to queue the next move: **Gravity Jab → Repulsion Sweep → Singularity Headbutt**.
+- Attack while sprinting for **Sprint Attack**, during a dash for **Dash Attack**, or in the air for **Airborne Smash**.
+
+The nearby **Void Dummy** has health, damage numbers, hit flash, stagger and knockback. It has no AI and reforms after depletion. Falling into the gap respawns the player.
+
+## The visual rig was replaced
+
+The main character is now rendered by **one AnimatedSprite2D** using `Animations/void_frames.tres`. Every texture is a complete character drawing: head/ring, torso, both arms/hands, both legs/feet and restrained debris. There are no independently animated body pieces, bones, limb pivots, procedural limb rotations, body stretching, or runtime AnimationPlayer tracks.
+
+The complete-frame artwork was generated from the approved master. Run and sprint use separately drawn poses, including opposite-arm corrections. The jab was regenerated to make its punching shoulder, upper arm and elbow visible instead of appearing to emerge from the chest. Character motion comes from switching drawings; the sprite's transform stays fixed. Facing uses `flip_h` only.
+
+| Animation | Drawings | Rate |
+|---|---:|---:|
+| Idle | 8 | 8 FPS |
+| Run | 8 | 12 FPS |
+| Sprint | 8 | 14 FPS |
+| Jump | 4 | 10 FPS |
+| Fall | 4 | 8 FPS |
+| Dash | 6 | 14 FPS |
+| Gravity Jab | 6 | combat clock |
+| Repulsion Sweep | 6 | combat clock |
+| Singularity Headbutt | 6 | combat clock |
+| Sprint Attack | 6 | combat clock |
+| Dash Attack | 6 | combat clock |
+| Airborne Smash | 6 | combat clock |
+
+There are **74 complete-character PNG frames** on a shared transparent **160×112** canvas, with a foot baseline at **104**. Standing character art is about 80 pixels tall. The wider transparent canvas accommodates a punch or dash silhouette without shrinking the character. Every frame uses nearest filtering. The sprite sits at `(0,-48)` so the baseline aligns with the controller's feet.
+
+`Assets/VoidConstruct/FrameSources` retains the approved master, selected generated source drawings/sheets and portable import manifest. `Tools/build_full_frames.gd` performs ordinary whole-image cropping, uniform nearest-neighbor import scaling and canvas/baseline placement. It does not extract limbs, invent poses, deform the body, or assemble parts. Explicit atlas regions preserve complete drawings when the generated sheet's gutters are uneven. Generated source art and its normalized game frames are both retained for review; pixel-perfect art refinement can be done directly on the PNG frames without changing controller code.
+
+Regenerate normalized frames from the retained sources:
 
 ```sh
-godot --path black-hole-rogue
+godot --headless --path black-hole-rogue --script res://Tools/build_full_frames.gd
+godot --headless --path black-hole-rogue --editor --import
 ```
 
-Controls: **A/D** move, **Space** jump (hold for height), **Shift** sprint, **J** dash, **K / left click** melee (tap again to chain). Falling into the gap resets the player. There are three raised platforms and a 144-pixel gap on a 16-pixel TileMapLayer grid. The 22×60 collision capsule is independent of the visual scale.
+## Stable gameplay and scene structure
 
-## Artwork and animation status
+`Scenes/player.tscn` contains `CollisionShape2D`, `AnimatedSprite2D`, `Camera2D`, `AttackHitbox`, `OrbitCoreContainer`, `GravityVFX` and `Combat`. The orbit-core container is empty; no new weapon system was added. Gravity effects and whole-frame dash afterimages are separate from the character body.
 
-`Assets/VoidConstruct/void_construct.png` is newly generated original transparent artwork. No old character sprites are referenced by the new scene. The roughly 72-pixel visible character uses nearest-neighbor filtering.
+The original **22×60 collision capsule**, movement speeds, acceleration, sprint, coyote time, jump buffer, variable jump, dash, camera limits and platform collisions are preserved. The character remains on foreground depth 20 so buildings cannot hide the body. Jump/fall/dash animations hold their last drawing if complete; they do not restart every physics frame.
 
-The character now uses a **15-part articulated cutout rig** textured directly from the generated master: head, chest, hips, two upper arms, forearms, hands, thighs, shins, and feet. Run and sprint alternate arms and legs with knee bends and grounded foot contact. Sprint adds forward lean and fragment lag. Jump, fall, and dash have distinct full-body poses. Idle breathes through the chest while the head and surrounding fragments float independently. A highlight moves around the black-hole ring. Dash ghosts snapshot the full articulated pose, including facing, and fade out.
+`Scripts/full_frame_visual.gd` handles animation selection and facing. `Scripts/gravity_combat.gd` owns buffered input, active windows and real Area2D hitboxes. Its clock selects the attack drawing, so hitstop pauses the complete impact frame and hitbox timing together. One press starts one attack; the one-slot buffer cannot skip steps or auto-repeat. Basic-combo inactivity resets after 0.7 seconds. Context attacks do not automatically chain into the basic combo.
 
-Motion now uses continuous gait interpolation, delayed wrists/head, offset knee timing, acceleration drag, and landing compression to avoid rigid clockwork stepping; repeated state assignments do not restart playback. Mirroring happens inside the visual hierarchy, leaving player collision unchanged. This is runtime cutout animation from consistent original artwork, not newly drawn frame-by-frame sprite sheets.
+Each move has its own editable resource under `Resources/FrameCombat` for damage, duration, active windows, reach, shape, knockback, pull, stagger and hitstop. Attack-window timing matches the six drawings' preparation/extension/impact/recovery sequence. Sprint and dash attacks retain more momentum than standing attacks. Airborne smash holds its plunge drawing while descending, then finishes the drawn landing recovery; a bounded hold and normal falling physics prevent hovering. Jump and dash cancel attacks safely.
 
-## Validation
+Damage is limited to once per target per move. Wall checks block both damage and gravity pull through solid geometry. Headbutt and smash only add small camera feedback on confirmed hits. The dummy uses a physics-state reset and reforms automatically for repeat testing. No enemies with AI, weapons, inventory, upgrades, bosses or capture mechanics were added.
+
+## Validation and art preview
 
 ```sh
 godot --headless --path black-hole-rogue --editor --import
 godot --headless --path black-hole-rogue --quit-after 120
 godot --headless --path black-hole-rogue --script res://Tests/movement_smoke.gd
-godot --headless --path black-hole-rogue --script res://Tests/animation_smoke.gd
 godot --headless --path black-hole-rogue --script res://Tests/combat_platform_smoke.gd
+godot --headless --path black-hole-rogue --script res://Tests/animation_smoke.gd
+godot --headless --path black-hole-rogue --script res://Tests/gravity_combat_smoke.gd
 ```
 
-The smoke test exercises grounded spawn, TileMapLayer collision, run/sprint speeds, deceleration, variable jump height, gap crossing and landing, dash speed, held-key behavior, facing, coyote time, jump buffering, and fall recovery. The animation suite also checks limb opposition, pose differences, idle root stability, grounded foot alignment, facing, and afterimage cleanup. Animation poses and the game view were additionally rendered and visually inspected through a local dummy display using Mesa software rendering. Subjective controller feel still benefits from hands-on playtesting.
+These check movement and jump reach, all three platform landings, foreground rendering, exact locomotion frame counts/rates, full transparent frame canvases, actual frame advancement, mirroring, nonlooping holds, stable sprite/collider transforms, three-stage order, contextual attacks, per-move hits, buffering, hitstop, wall blocking, cancellation and dummy reformation. Art readability is additionally checked in rendered contact sheets and the running game; numerical tests alone do not judge illustration quality.
 
-Before replacement, the entire original project was archived at `/workspace/orbithole-backups/pre-phase1.tar.gz`. Existing sprite files remain in the checkout, unused. Basic melee was added in the follow-up polish pass described below. No enemies, weapons, inventory, or upgrade systems were added.
+With a display, capture a developer contact sheet using:
 
-## Changed files
+```sh
+godot --path black-hole-rogue --script res://Tools/preview_full_frames.gd -- run /tmp/run-preview.png
+```
 
-Modified:
-- `black-hole-rogue/project.godot`
-- `black-hole-rogue/Scenes/game.tscn`
-- `black-hole-rogue/Scenes/player.tscn`
-- `black-hole-rogue/Scripts/player.gd`
+## Backups and changed files
 
-Added:
-- `.gitignore`
-- `PHASE1.md`
-- `black-hole-rogue/Assets/VoidConstruct/void_construct.png`
-- `black-hole-rogue/Assets/VoidConstruct/void_construct.png.import`
-- `black-hole-rogue/Scripts/test_level.gd`
-- `black-hole-rogue/Scripts/test_level.gd.uid`
-- `black-hole-rogue/Scripts/practice_core.gd`
-- `black-hole-rogue/Scripts/practice_core.gd.uid`
-- `black-hole-rogue/Scripts/void_visual.gd`
-- `black-hole-rogue/Scripts/void_visual.gd.uid`
-- `black-hole-rogue/Tests/movement_smoke.gd`
-- `black-hole-rogue/Tests/movement_smoke.gd.uid`
-- `black-hole-rogue/Tests/animation_smoke.gd`
-- `black-hole-rogue/Tests/animation_smoke.gd.uid`
-- `black-hole-rogue/Tests/combat_platform_smoke.gd`
-- `black-hole-rogue/Tests/combat_platform_smoke.gd.uid`
+`Backups/pre_full_frames_visual.zip` is a verified archive of the previous visual scene, rig scripts, parts atlas, animation tracks and associated combat resources from commit `2229a93`. Extract it into a separate review folder rather than overwriting the current project. The old full project is also recoverable from that Git commit; a local complete snapshot was saved at `/workspace/orbithole-backups/pre-frame-animation.tar.gz` before replacement.
 
-Godot's ignored `.godot/` directory contains generated import/cache files.
+The old `Scenes/void_visual.tscn`, `Scripts/void_visual.gd`, `Animations/gravity_melee.tres`, disassembled `body_parts.png`, old combat resources and rig-builder script were removed after the backup was verified.
 
-The pre-animation implementation was also backed up at `/workspace/orbithole-backups/pre-animation-rig.tar.gz`.
-
-## Movement and gravity-melee polish
-
-The player now renders on foreground depth 20. Negative depths inside the rig therefore stay ahead of the skyline, and dash ghosts use foreground depth 15. This fixes buildings hiding the back arm and legs.
-
-Jump takeoff is now -580 px/s (previously -420), with slightly reduced gravity near the apex and variable height on release. The old jump reached about 74 pixels, below the 96-pixel first slab. All three elevated slabs are now reachable; the test suite actually jumps onto and lands on each. A ledge-climb mechanic is not needed for these jumps.
-
-Tap **K or left mouse** to start **inward-pull punch → reverse punch → gravity kick**. Tap again after the windup begins to buffer the next stage. Each move compresses its stone fragments toward the head, snaps the striking limb outward, follows through, and recalls the pieces. Inward spirals, ring pulses, asymmetrical poses, and delayed hands/head emphasize a singularity learning to use a humanoid body. Holding attack does not repeat the combo.
-
-The attack uses actual directional collision queries with windup/active/recovery windows, one hit per target per stage, and knockback. During windup, the practice core is physically attracted toward the player. The core then reacts to punches/kicks and reports hits; it is an anchored training prop, not an enemy. Jump or dash cancels an attack. Airborne attacks do not suspend gravity and cannot restart repeatedly before landing.
-
-The combat/platform test covers the layering regression, all three slab landings, attraction, all combo hit windows, left-facing hits, buffering, no held-key repetition, cancellation, and airborne limits. The original movement and animation tests also pass. Combat pose galleries and a player standing directly in front of a building were rendered for visual inspection; hands-on playtesting remains useful for tuning feel.
-
-A pre-polish backup is retained at `/workspace/orbithole-backups/pre-combat-polish.tar.gz`.
+The replacement adds `Animations/void_frames.tres`, `Assets/VoidConstruct/Frames/*`, `FrameSources/*`, `Scripts/full_frame_visual.gd`, `Scripts/gravity_vfx.gd`, six `Resources/FrameCombat/*.tres`, `Tools/build_full_frames.gd`, and `Tools/preview_full_frames.gd`. It updates `Scenes/player.tscn`, the player/combat/dummy/level scripts, related test suites and this guide. Godot `.uid` and `.png.import` metadata accompany the assets. Caches and local test recordings are not committed.

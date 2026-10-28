@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GravityAttack" load_steps=2 format=3]
+[ext_resource type="Script" path="res://Scripts/gravity_attack.gd" id="1"]
+[resource]
+script = ExtResource("1")
+title = "AIRBORNE SMASH"
+animation = &"airborne_smash"
+duration = 0.5
+active_start = 0.17
+active_end = 0.333
+damage = 26
+knockback = Vector2(90, 120)
+stagger = 0.27
+hitstop = 0.045
+reach = Vector2(4, -7)
+size = Vector2(44, 44)
+shape_type = 2
+pull_strength = 0
+pull_end = 0
