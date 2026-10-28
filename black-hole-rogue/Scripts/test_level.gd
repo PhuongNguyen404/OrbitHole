@@ -11,6 +11,9 @@ func _ready() -> void:
 	var core = preload("res://Scripts/practice_core.gd").new()
 	core.position = Vector2(264,413)
 	add_child(core)
+	var enemy := preload("res://Scenes/crystal_enemy.tscn").instantiate()
+	enemy.position = Vector2(720,448)
+	add_child(enemy)
 	queue_redraw()
 
 func _build_tiles() -> void:
@@ -89,4 +92,4 @@ func _process(_delta: float) -> void:
 	if combat.attacking:
 		combo_readout.text = "%02d  /  %s%s" % [combat.stage+1,combat.attacks[combat.stage].title,"  •  NEXT QUEUED" if combat.queued else ""]
 	else:
-		combo_readout.text = "VOID DUMMY  •  train the three-hit sequence"
+		combo_readout.text = "VOID DUMMY  •  train combos     CRYSTAL SENTINEL  •  ahead"

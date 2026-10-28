@@ -20,6 +20,9 @@ func run() -> void:
 	game = load("res://Scenes/game.tscn").instantiate()
 	root.add_child(game)
 	current_scene = game
+	# These regressions isolate the player/dummy; enemy interaction has its own suite.
+	for enemy in get_nodes_in_group("crystal_enemies"):
+		enemy.queue_free()
 	player = game.get_node("Player")
 	visual = player.get_node("AnimatedSprite2D")
 	await frames(5)
@@ -27,10 +30,40 @@ func run() -> void:
 	check(not player.has_node("VisualRoot") and not player.has_node("AnimationPlayer"),"puppet root and limb AnimationPlayer are removed from the playable scene")
 	check(visual.get_child_count()==0,"the character image has no independently animated limb children")
 	check(player.has_node("GravityVFX") and player.has_node("OrbitCoreContainer"),"gravity effects and orbit cores remain separate from body art")
-	var expected := {"idle":[8,8.0],"run":[8,12.0],"sprint":[8,14.0],"jump":[4,10.0],"fall":[4,8.0],"dash":[6,14.0]}
-	for animation in expected:
+	var expected_minimum := {"idle":8,"run":6,"sprint":6,"jump":4,"fall":4,"dash":4}
+	for animation in expected_minimum:
 		check(visual.sprite_frames.has_animation(animation),"full-character animation exists: "+animation)
-		check(visual.sprite_frames.get_frame_count(animation)==expected[animation][0] and visual.sprite_frames.get_animation_speed(animation)==expected[animation][1],"requested count and FPS: "+animation)
+		check(visual.sprite_frames.get_frame_count(animation)>=expected_minimum[animation] and visual.sprite_frames.get_animation_speed(animation)>0,"complete authored sequence and valid rate: "+animation)
+	var idle_reference: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://Tests/fixtures/idle_reference.json"))
+	var idle_unchanged: bool = visual.sprite_frames.get_animation_speed(&"idle")==idle_reference.speed and visual.sprite_frames.get_animation_loop(&"idle")==idle_reference.loop and visual.sprite_frames.get_frame_count(&"idle")==idle_reference.frames.size()
+	for index in range(idle_reference.frames.size()):
+		var expected_frame: Dictionary = idle_reference.frames[index]
+		var texture := visual.sprite_frames.get_frame_texture(&"idle",index)
+		idle_unchanged = idle_unchanged and texture.resource_path==expected_frame.path and FileAccess.get_sha256(texture.resource_path)==expected_frame.sha256 and visual.sprite_frames.get_frame_duration(&"idle",index)==expected_frame.duration
+	check(idle_unchanged,"approved idle artwork, order, FPS and individual timings are byte-for-byte unchanged")
+	var air_reference: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://Tests/fixtures/preserved_air_pose_reference.json"))
+	var air_art_unchanged := true
+	for expected_frame in air_reference.frames:
+		air_art_unchanged = air_art_unchanged and FileAccess.get_sha256(expected_frame.path)==expected_frame.sha256
+	check(air_art_unchanged,"good jump and fall drawings are preserved while playback timing is polished")
+	for animation in [&"run",&"sprint",&"gravity_jab",&"airborne_smash"]:
+		var low := INF
+		var high := -INF
+		for index in range(visual.sprite_frames.get_frame_count(animation)):
+			var duration := visual.sprite_frames.get_frame_duration(animation,index)
+			check(duration>0 and is_finite(duration),"positive authored frame timing in "+str(animation))
+			low = minf(low,duration)
+			high = maxf(high,duration)
+		check(high-low>.05,"contact, anticipation or impact drawings have deliberate individual timing in "+str(animation))
+	var same_sprint_art := visual.sprite_frames.get_frame_count(&"run")==visual.sprite_frames.get_frame_count(&"sprint")
+	var run_seconds := 0.0
+	var sprint_seconds := 0.0
+	for index in range(visual.sprite_frames.get_frame_count(&"run")):
+		run_seconds += visual.sprite_frames.get_frame_duration(&"run",index)/visual.sprite_frames.get_animation_speed(&"run")
+		if index<visual.sprite_frames.get_frame_count(&"sprint"):
+			same_sprint_art = same_sprint_art and visual.sprite_frames.get_frame_texture(&"run",index).resource_path==visual.sprite_frames.get_frame_texture(&"sprint",index).resource_path
+			sprint_seconds += visual.sprite_frames.get_frame_duration(&"sprint",index)/visual.sprite_frames.get_animation_speed(&"sprint")
+	check(same_sprint_art and sprint_seconds<run_seconds,"sprint reuses the exact run drawings in order at a faster cadence")
 	var all_complete_canvases := true
 	var all_have_alpha_margins := true
 	var distinct_poses := true
@@ -70,10 +103,18 @@ func run() -> void:
 		player.combat.step(.01)
 		check(player.combat.elapsed==elapsed and visual.frame==frame_at_hitstop,"hitstop holds the current complete-character frame")
 		player.combat.cancel()
+	visual.motion_velocity = Vector2(0,-580)
 	visual.state = "JUMP"
-	await create_timer(.55).timeout
+	var jump_duration := 0.0
+	for index in range(visual.sprite_frames.get_frame_count(&"jump")):
+		jump_duration += visual.sprite_frames.get_frame_duration(&"jump",index)/visual.sprite_frames.get_animation_speed(&"jump")
+	await create_timer(jump_duration+.05).timeout
 	var jump_last := visual.sprite_frames.get_frame_count(&"jump")-1
-	check(not visual.sprite_frames.get_animation_loop(&"jump") and visual.frame==jump_last,"nonlooping jump reaches its final drawing")
+	check(visual.frame<jump_last and not visual.is_playing(),"the rising drawing waits while physical upward velocity remains high")
+	visual.motion_velocity = Vector2(0,-40)
+	await process_frame
+	await process_frame
+	check(not visual.sprite_frames.get_animation_loop(&"jump") and visual.frame==jump_last,"the physical apex selects the final jump drawing")
 	await create_timer(.20).timeout
 	check(visual.animation==&"jump" and visual.frame==jump_last and not visual.is_playing(),"finished jump holds the last drawing instead of restarting takeoff")
 	check(visual.transform==sprite_transform and collision.transform==collider_transform,"holding a finished pose does not alter body transform or collision")

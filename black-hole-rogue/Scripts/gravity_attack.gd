@@ -6,6 +6,9 @@ extends Resource
 @export_range(0.1,2.0) var duration := 0.28
 @export var active_start := 0.075
 @export var active_end := 0.13
+## Frame indices are authoritative; seconds remain as legacy resource metadata.
+@export var active_from_frame := 2
+@export var active_through_frame := 3
 @export var damage := 8
 @export var knockback := Vector2(80,-20)
 @export var stagger := 0.08

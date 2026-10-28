@@ -1,6 +1,7 @@
 extends CharacterBody2D
 signal state_changed(new_state: String)
 signal melee_hit(target: Node, stage: int)
+signal enemy_hit
 enum State { IDLE, RUN, SPRINT, JUMP, FALL, DASH, ATTACK }
 @export var run_speed := 240.0
 @export var sprint_speed := 360.0
@@ -27,6 +28,10 @@ var spawn_position: Vector2
 var camera_look_x := 0.0
 var shake_left := 0.0
 var shake_clock := 0.0
+var enemy_invuln_left := 0.0
+var enemy_knockback_left := 0.0
+var enemy_hit_count := 0
+var enemy_flash: Tween
 @onready var visual: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera: Camera2D = $Camera2D
 @onready var combat: Node = $Combat
@@ -42,6 +47,8 @@ func _ready() -> void:
 	combat.confirmed_hit.connect(_on_melee_hit)
 
 func _physics_process(delta: float) -> void:
+	enemy_invuln_left = maxf(0.0,enemy_invuln_left-delta)
+	enemy_knockback_left = maxf(0.0,enemy_knockback_left-delta)
 	var direction := Input.get_axis("move_left","move_right")
 	if direction!=0.0 and not combat.attacking:
 		facing = signf(direction)
@@ -89,7 +96,8 @@ func _physics_process(delta: float) -> void:
 		var rate := acceleration if is_on_floor() else air_acceleration
 		if direction==0.0:
 			rate = deceleration if is_on_floor() else air_acceleration*.65
-		velocity.x = move_toward(velocity.x,target,rate*delta)
+		if enemy_knockback_left<=0.0:
+			velocity.x = move_toward(velocity.x,target,rate*delta)
 	# A context smash accelerates down after its drawn anticipation; the body
 	# still uses move_and_slide and the unchanged collision shape.
 	if combat.attacking and combat.stage == 5 and combat.progress > 0.30 and not is_on_floor():
@@ -98,6 +106,7 @@ func _physics_process(delta: float) -> void:
 	landing_speed = velocity.y
 	move_and_slide()
 	if is_on_floor() and not was_grounded and landing_speed>120.0:
+		combat.on_landed()
 		visual.land(landing_speed)
 	if global_position.y>720.0:
 		respawn()
@@ -143,4 +152,25 @@ func respawn() -> void:
 	jump_buffer_left = 0.0
 	coyote_left = 0.0
 	shake_left = 0.0
+	enemy_invuln_left = 0.0
+	enemy_knockback_left = 0.0
+	if enemy_flash!=null and enemy_flash.is_valid():
+		enemy_flash.kill()
+	visual.modulate = Color.WHITE
 	camera.reset_smoothing()
+
+func receive_enemy_hit(impulse: Vector2) -> bool:
+	if enemy_invuln_left>0.0:
+		return false
+	enemy_invuln_left = 0.75
+	enemy_knockback_left = 0.12
+	enemy_hit_count += 1
+	combat.cancel()
+	velocity = impulse
+	if enemy_flash!=null and enemy_flash.is_valid():
+		enemy_flash.kill()
+	visual.modulate = Color(1.6,0.7,0.8)
+	enemy_flash = create_tween()
+	enemy_flash.tween_property(visual,"modulate",Color.WHITE,0.18)
+	enemy_hit.emit()
+	return true

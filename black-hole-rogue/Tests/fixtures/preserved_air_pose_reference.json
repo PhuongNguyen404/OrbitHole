@@ -1,0 +1,36 @@
+{
+  "frames": [
+    {
+      "path": "res://Assets/VoidConstruct/Frames/jump_00.png",
+      "sha256": "09c7b345a1c5669f470e833caac9f1e598ec42f37a50ed0435ddc15d8e023f7c"
+    },
+    {
+      "path": "res://Assets/VoidConstruct/Frames/jump_01.png",
+      "sha256": "ca8ff1f8c6efe9b96dd2426a5613dfe884d438232e07883e7b6adba67cb85780"
+    },
+    {
+      "path": "res://Assets/VoidConstruct/Frames/jump_02.png",
+      "sha256": "25fcf6f6c8b5e04dd0982e2438d968e73492157698a2085dc6845600acd71c6d"
+    },
+    {
+      "path": "res://Assets/VoidConstruct/Frames/jump_03.png",
+      "sha256": "e46891b6d4a822577d5938918cf50d3ff13d81483ae0d674215fe055d5f270ab"
+    },
+    {
+      "path": "res://Assets/VoidConstruct/Frames/fall_00.png",
+      "sha256": "39575582b31a74d89979953354e45942fc3ffa116822e9c77ae30d681e9f94b4"
+    },
+    {
+      "path": "res://Assets/VoidConstruct/Frames/fall_01.png",
+      "sha256": "6639f5a426549abfbd88215ea53da43b5f76ef26bcaa48ec720b8476538e7028"
+    },
+    {
+      "path": "res://Assets/VoidConstruct/Frames/fall_02.png",
+      "sha256": "f163f87c765303ce4ecf753502af5d8cc26c35cc45041031de579d80e033f88e"
+    },
+    {
+      "path": "res://Assets/VoidConstruct/Frames/fall_03.png",
+      "sha256": "bfed0f73e022196d7ccd87ca564ebbc58f3cd70453dc175ca78fe232cf1c7b07"
+    }
+  ]
+}

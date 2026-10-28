@@ -1,0 +1,46 @@
+{
+	"frames": [
+		{
+			"duration": 1.0,
+			"path": "res://Assets/VoidConstruct/Frames/idle_00.png",
+			"sha256": "04a7c83ae235a7251b366ac3f82c35fc3138afb9616c66fdde12cfe2ea6b38b5"
+		},
+		{
+			"duration": 1.0,
+			"path": "res://Assets/VoidConstruct/Frames/idle_01.png",
+			"sha256": "0a36c6caf9372f6a5c8bcc547677875a366326f71c36eb202d982df10f8eb08f"
+		},
+		{
+			"duration": 1.0,
+			"path": "res://Assets/VoidConstruct/Frames/idle_02.png",
+			"sha256": "d19591aef24830d4e979314a8b9f79fa985c82672fb385756efa7d4966c1ab9e"
+		},
+		{
+			"duration": 1.0,
+			"path": "res://Assets/VoidConstruct/Frames/idle_03.png",
+			"sha256": "2d0783618a3e28d13b95ea0f10b981df715221925e0f2be2d13f7bf24597c510"
+		},
+		{
+			"duration": 1.0,
+			"path": "res://Assets/VoidConstruct/Frames/idle_04.png",
+			"sha256": "c47188e2e14433709d144b0c58ed33e33d3d275a67ad7dda6e02400110686e13"
+		},
+		{
+			"duration": 1.0,
+			"path": "res://Assets/VoidConstruct/Frames/idle_05.png",
+			"sha256": "883cdc15ec3476f89cf7b1a06cbeb97d280648f335d9174b259d00536cb21de6"
+		},
+		{
+			"duration": 1.0,
+			"path": "res://Assets/VoidConstruct/Frames/idle_06.png",
+			"sha256": "f037f0e4e99e873422cf9b0ed24005f02495e67851f4c005121257eb9c2adad0"
+		},
+		{
+			"duration": 1.0,
+			"path": "res://Assets/VoidConstruct/Frames/idle_07.png",
+			"sha256": "e218f1fc6efc9e001c61fa2f9e9b475c0d769b560118706cf78090cdd6faad26"
+		}
+	],
+	"loop": true,
+	"speed": 8.0
+}

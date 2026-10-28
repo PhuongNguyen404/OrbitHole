@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/CrystalSentinel/enemy_00.png" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/CrystalSentinel/enemy_01.png" id="2"]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/CrystalSentinel/enemy_02.png" id="3"]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/CrystalSentinel/enemy_03.png" id="4"]
+[ext_resource type="Texture2D" path="res://Assets/Enemies/CrystalSentinel/enemy_04.png" id="5"]
+[resource]
+animations = [
+{"name": &"idle", "loop": true, "speed": 4, "frames": [{"duration":1.0,"texture":ExtResource("1")}]},
+{"name": &"walk", "loop": true, "speed": 6, "frames": [{"duration":1.0,"texture":ExtResource("2")},{"duration":1.0,"texture":ExtResource("3")}]},
+{"name": &"swipe", "loop": false, "speed": 8, "frames": [{"duration":1.0,"texture":ExtResource("3")}]},
+{"name": &"hurt", "loop": false, "speed": 8, "frames": [{"duration":1.0,"texture":ExtResource("4")}]},
+{"name": &"dead", "loop": false, "speed": 4, "frames": [{"duration":1.0,"texture":ExtResource("5")}]},
+]

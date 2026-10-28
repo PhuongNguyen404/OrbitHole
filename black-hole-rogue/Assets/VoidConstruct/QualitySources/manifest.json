@@ -1,0 +1,514 @@
+{
+	"animations": {
+		"airborne_smash": {
+			"durations": [
+				0.6,
+				1.3,
+				0.45,
+				1.2,
+				0.9,
+				0.65
+			],
+			"fps": 18.0,
+			"frames": [
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/airborne_smash_00.png"
+				},
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/airborne_smash_01.png"
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-c1673155-4921-4818-80f2-1ec1c4f2f160.png",
+					"region": [
+						1191.0,
+						103.0,
+						231.0,
+						445.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-c1673155-4921-4818-80f2-1ec1c4f2f160.png",
+					"region": [
+						63.0,
+						657.0,
+						467.0,
+						341.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-c1673155-4921-4818-80f2-1ec1c4f2f160.png",
+					"region": [
+						633.0,
+						668.0,
+						355.0,
+						330.0
+					]
+				},
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/airborne_smash_05.png"
+				}
+			],
+			"loop": false,
+			"repair": "Remove baked temporary effects; preserve clean original drawings and dramatic poses.",
+			"scale": 0.151515151515152
+		},
+		"dash": {
+			"durations": [
+				1.1,
+				0.55,
+				0.7,
+				0.75,
+				0.9,
+				1.0
+			],
+			"fps": 14.0,
+			"frames": [
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/dash_00.png"
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-55c559e9-6732-48f3-b0f4-f2155fd75ef4.png",
+					"region": [
+						542.0,
+						106.0,
+						458.0,
+						370.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-55c559e9-6732-48f3-b0f4-f2155fd75ef4.png",
+					"region": [
+						1006.0,
+						143.0,
+						527.0,
+						276.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-55c559e9-6732-48f3-b0f4-f2155fd75ef4.png",
+					"region": [
+						55.0,
+						521.0,
+						469.0,
+						432.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-55c559e9-6732-48f3-b0f4-f2155fd75ef4.png",
+					"region": [
+						559.0,
+						578.0,
+						468.0,
+						371.0
+					]
+				},
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/dash_05.png"
+				}
+			],
+			"loop": false,
+			"repair": "Remove baked temporary effects; preserve clean original drawings and dramatic poses.",
+			"scale": 0.196078431372549
+		},
+		"dash_attack": {
+			"durations": [
+				0.5,
+				1.0,
+				0.6,
+				1.0,
+				1.1,
+				0.8
+			],
+			"fps": 18.0,
+			"frames": [
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-cbc10fa5-24a2-40c6-bc10-66efbbc3fbba.png",
+					"region": [
+						36.0,
+						139.0,
+						503.0,
+						331.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-cbc10fa5-24a2-40c6-bc10-66efbbc3fbba.png",
+					"region": [
+						546.0,
+						101.0,
+						423.0,
+						368.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-cbc10fa5-24a2-40c6-bc10-66efbbc3fbba.png",
+					"region": [
+						1001.0,
+						101.0,
+						513.0,
+						374.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-cbc10fa5-24a2-40c6-bc10-66efbbc3fbba.png",
+					"region": [
+						15.0,
+						569.0,
+						478.0,
+						391.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-cbc10fa5-24a2-40c6-bc10-66efbbc3fbba.png",
+					"region": [
+						547.0,
+						607.0,
+						506.0,
+						348.0
+					]
+				},
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/dash_attack_05.png"
+				}
+			],
+			"loop": false,
+			"repair": "Remove baked temporary effects; preserve clean original drawings and dramatic poses.",
+			"scale": 0.191846522781775
+		},
+		"fall": {
+			"durations": [
+				0.75,
+				0.9,
+				1.15,
+				1.1
+			],
+			"existing_paths": [
+				"res://Assets/VoidConstruct/Frames/fall_00.png",
+				"res://Assets/VoidConstruct/Frames/fall_01.png",
+				"res://Assets/VoidConstruct/Frames/fall_02.png",
+				"res://Assets/VoidConstruct/Frames/fall_03.png"
+			],
+			"fps": 8.0,
+			"loop": false
+		},
+		"gravity_jab": {
+			"durations": [
+				0.6,
+				1.25,
+				0.65,
+				0.35,
+				1.1,
+				1.15,
+				0.7
+			],
+			"fps": 18.0,
+			"frames": [
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-99876503-10d5-46af-a199-0ba22c2d7f11.png",
+					"region": [
+						41.0,
+						91.0,
+						446.0,
+						857.0
+					],
+					"scale": 0.0955794504181601
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-3a529713-8df9-4dc5-833c-51fe38c9ef61.png",
+					"region": [
+						239.0,
+						0.0,
+						382.0,
+						537.0
+					],
+					"scale": 0.15151515151515152
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-3a529713-8df9-4dc5-833c-51fe38c9ef61.png",
+					"region": [
+						855.0,
+						0.0,
+						368.0,
+						537.0
+					],
+					"scale": 0.15151515151515152
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-3a529713-8df9-4dc5-833c-51fe38c9ef61.png",
+					"region": [
+						246.0,
+						536.0,
+						446.0,
+						548.0
+					],
+					"scale": 0.15151515151515152
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-99876503-10d5-46af-a199-0ba22c2d7f11.png",
+					"region": [
+						519.0,
+						91.0,
+						552.0,
+						857.0
+					],
+					"scale": 0.0955794504181601
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-3a529713-8df9-4dc5-833c-51fe38c9ef61.png",
+					"region": [
+						852.0,
+						536.0,
+						372.0,
+						546.0
+					],
+					"scale": 0.15151515151515152
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-99876503-10d5-46af-a199-0ba22c2d7f11.png",
+					"region": [
+						1096.0,
+						91.0,
+						440.0,
+						857.0
+					],
+					"scale": 0.0955794504181601
+				}
+			],
+			"key_pose_order": [
+				"ready",
+				"anticipation",
+				"shoulder_rotation",
+				"extension",
+				"impact",
+				"recoil",
+				"recovered"
+			],
+			"loop": false
+		},
+		"jump": {
+			"durations": [
+				0.7,
+				0.65,
+				1.2,
+				1.45
+			],
+			"existing_paths": [
+				"res://Assets/VoidConstruct/Frames/jump_00.png",
+				"res://Assets/VoidConstruct/Frames/jump_01.png",
+				"res://Assets/VoidConstruct/Frames/jump_02.png",
+				"res://Assets/VoidConstruct/Frames/jump_03.png"
+			],
+			"fps": 10.0,
+			"loop": false
+		},
+		"landing": {
+			"durations": [
+				0.5,
+				0.9,
+				0.7,
+				0.7
+			],
+			"existing_paths": [
+				"res://Assets/VoidConstruct/Frames/fall_03.png",
+				"res://Assets/VoidConstruct/Frames/jump_00.png",
+				"res://Assets/VoidConstruct/Frames/fall_02.png",
+				"res://Assets/VoidConstruct/Frames/idle_00.png"
+			],
+			"fps": 16.0,
+			"loop": false
+		},
+		"repulsion_sweep": {
+			"durations": [
+				0.7,
+				1.25,
+				0.65,
+				1.0,
+				1.15,
+				0.75
+			],
+			"fps": 18.0,
+			"frames": [
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/repulsion_sweep_00.png"
+				},
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/repulsion_sweep_01.png"
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-cb01588d-94d1-49f4-8cb3-5a02b36fd8d6.png",
+					"region": [
+						1036.0,
+						74.0,
+						456.0,
+						427.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-cb01588d-94d1-49f4-8cb3-5a02b36fd8d6.png",
+					"region": [
+						32.0,
+						575.0,
+						436.0,
+						408.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-cb01588d-94d1-49f4-8cb3-5a02b36fd8d6.png",
+					"region": [
+						566.0,
+						603.0,
+						489.0,
+						380.0
+					]
+				},
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/repulsion_sweep_05.png"
+				}
+			],
+			"loop": false,
+			"repair": "Remove baked temporary effects; preserve clean original drawings and dramatic poses.",
+			"scale": 0.186046511627907
+		},
+		"run": {
+			"durations": [
+				1.15,
+				0.8,
+				1.0,
+				0.85,
+				1.15,
+				0.8,
+				1.0,
+				0.85
+			],
+			"existing_paths": [
+				"res://Assets/VoidConstruct/Frames/run_00.png",
+				"res://Assets/VoidConstruct/Frames/run_01.png",
+				"res://Assets/VoidConstruct/Frames/run_02.png",
+				"res://Assets/VoidConstruct/Frames/run_03.png",
+				"res://Assets/VoidConstruct/Frames/run_04.png",
+				"res://Assets/VoidConstruct/Frames/run_05.png",
+				"res://Assets/VoidConstruct/Frames/run_06.png",
+				"res://Assets/VoidConstruct/Frames/run_07.png"
+			],
+			"fps": 20.0,
+			"loop": true,
+			"note": "Provisional previous art: awaiting exact user-supplied PNG sheet."
+		},
+		"singularity_headbutt": {
+			"durations": [
+				0.75,
+				1.6,
+				0.4,
+				1.0,
+				1.4,
+				0.85
+			],
+			"fps": 18.0,
+			"frames": [
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/singularity_headbutt_00.png"
+				},
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/singularity_headbutt_01.png"
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-6e6c422f-4061-48d0-8dd2-d77be54e81fb.png",
+					"region": [
+						1025.0,
+						111.0,
+						494.0,
+						405.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-6e6c422f-4061-48d0-8dd2-d77be54e81fb.png",
+					"region": [
+						45.0,
+						618.0,
+						469.0,
+						390.0
+					]
+				},
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/singularity_headbutt_04.png"
+				},
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/singularity_headbutt_05.png"
+				}
+			],
+			"loop": false,
+			"repair": "Remove baked temporary effects; preserve clean original drawings and dramatic poses.",
+			"scale": 0.164948453608247
+		},
+		"sprint": {
+			"durations": [
+				1.15,
+				0.8,
+				1.0,
+				0.85,
+				1.15,
+				0.8,
+				1.0,
+				0.85
+			],
+			"existing_paths": [
+				"res://Assets/VoidConstruct/Frames/run_00.png",
+				"res://Assets/VoidConstruct/Frames/run_01.png",
+				"res://Assets/VoidConstruct/Frames/run_02.png",
+				"res://Assets/VoidConstruct/Frames/run_03.png",
+				"res://Assets/VoidConstruct/Frames/run_04.png",
+				"res://Assets/VoidConstruct/Frames/run_05.png",
+				"res://Assets/VoidConstruct/Frames/run_06.png",
+				"res://Assets/VoidConstruct/Frames/run_07.png"
+			],
+			"fps": 28.0,
+			"loop": true,
+			"note": "Same run art at faster cadence; independent afterimages. Awaiting supplied PNG."
+		},
+		"sprint_attack": {
+			"durations": [
+				0.5,
+				1.0,
+				0.6,
+				1.0,
+				1.1,
+				0.8
+			],
+			"fps": 18.0,
+			"frames": [
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/sprint_attack_00.png"
+				},
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/sprint_attack_01.png"
+				},
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/sprint_attack_02.png"
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-0010aa2f-b216-4ff2-973f-ae2c8e3aa7ec.png",
+					"region": [
+						22.0,
+						608.0,
+						525.0,
+						367.0
+					]
+				},
+				{
+					"file": "res://Assets/VoidConstruct/QualitySources/exec-0010aa2f-b216-4ff2-973f-ae2c8e3aa7ec.png",
+					"region": [
+						574.0,
+						600.0,
+						467.0,
+						379.0
+					]
+				},
+				{
+					"reuse": "res://Assets/VoidConstruct/Frames/sprint_attack_05.png"
+				}
+			],
+			"loop": false,
+			"repair": "Remove baked temporary effects; preserve clean original drawings and dramatic poses.",
+			"scale": 0.19047619047619
+		}
+	}
+}

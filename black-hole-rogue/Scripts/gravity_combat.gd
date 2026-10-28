@@ -12,6 +12,11 @@ signal confirmed_hit(target: Node, stage: int)
 @export_range(0.2,2.0) var smash_hold_limit := 1.0
 @export_range(0.34,0.49) var smash_plunge_fraction := 0.46
 var smash_hold_elapsed := 0.0
+var release_fired := false
+var smash_landed := false
+var effective_active_start := 0.0
+var effective_active_end := 0.0
+var effective_plunge_fraction := 0.46
 var stage := -1
 var elapsed := 0.0
 var queued := false
@@ -72,14 +77,17 @@ func step(delta: float) -> void:
 		return
 	var attack := attacks[stage] as GravityAttack
 	elapsed += delta
-	if stage == 5 and not character.is_on_floor() and elapsed >= attack.duration * smash_plunge_fraction and smash_hold_elapsed < smash_hold_limit:
+	if stage == 5 and not smash_landed and not character.is_on_floor() and elapsed >= attack.duration * effective_plunge_fraction and smash_hold_elapsed < smash_hold_limit:
 		# Hold the authored plunge drawing until contact; physical descent keeps
 		# running, so a smash from a high jump does not recover in mid-air.
 		smash_hold_elapsed += delta
-		elapsed = attack.duration * smash_plunge_fraction
+		elapsed = attack.duration * effective_plunge_fraction
 	# Complete drawn frames and the active window use the same clock.
 	visual.set_attack_progress(progress)
-	_set_active(elapsed >= attack.active_start and elapsed < attack.active_end)
+	_set_active(elapsed >= effective_active_start and elapsed < effective_active_end)
+	if not release_fired and elapsed >= effective_active_start:
+		release_fired = true
+		visual.attack_release(stage, hitbox.global_position, direction)
 	if attack.pull_strength > 0.0 and elapsed < attack.pull_end:
 		_pull(attack,delta)
 	if active:
@@ -98,9 +106,14 @@ func start(index: int, facing: float) -> void:
 	direction = facing
 	elapsed = 0.0
 	smash_hold_elapsed = 0.0
+	release_fired = false
+	smash_landed = false
 	queued = false
 	struck.clear()
 	var attack := attacks[stage] as GravityAttack
+	effective_active_start = attack.duration * visual.frame_start_fraction(attack.animation, attack.active_from_frame)
+	effective_active_end = attack.duration * visual.frame_end_fraction(attack.animation, attack.active_through_frame)
+	effective_plunge_fraction = visual.frame_middle_fraction(attack.animation, 2) if stage == 5 else smash_plunge_fraction
 	var shape: Shape2D
 	match attack.shape_type:
 		1:
@@ -123,6 +136,21 @@ func start(index: int, facing: float) -> void:
 	visual.begin_attack(stage,attack.animation)
 	visual.facing = direction
 	attack_started.emit(stage)
+
+func on_landed() -> void:
+	if stage != 5 or smash_landed:
+		return
+	smash_landed = true
+	var attack := attacks[stage] as GravityAttack
+	# Contact advances from the held airborne drawing into the actual impact
+	# drawing. Ground shockwave is a separate one-shot effect, not baked art.
+	elapsed = maxf(elapsed, attack.duration * visual.frame_start_fraction(attack.animation, 3))
+	visual.set_attack_progress(progress)
+	_set_active(elapsed >= effective_active_start and elapsed < effective_active_end)
+	# A very low smash may reach ground before its airborne release event.
+	# The contact shockwave replaces that skipped pressure trail.
+	release_fired = true
+	visual.smash_land(character.global_position)
 
 func _set_active(value: bool) -> void:
 	if active == value:
@@ -151,10 +179,15 @@ func _clear_sight(point: Vector2) -> bool:
 	var ray := PhysicsRayQueryParameters2D.create(origin,point,1,[character.get_rid()])
 	return character.get_world_2d().direct_space_state.intersect_ray(ray).is_empty()
 
+func _target_point(target: Node2D) -> Vector2:
+	# Characters place their origin at the feet; aiming there would raycast into
+	# the floor and incorrectly reject a valid body hit. Props keep center origins.
+	return target.get_combat_target_point() if target.has_method("get_combat_target_point") else target.global_position
+
 func _try_hit(target: Node) -> void:
 	if not attacking or not active or struck.has(target.get_instance_id()) or not target.has_method("receive_attack"):
 		return
-	if not _clear_sight(target.global_position):
+	if not _clear_sight(_target_point(target)):
 		return
 	var attack := attacks[stage] as GravityAttack
 	var impulse := Vector2(attack.knockback.x*direction,attack.knockback.y)
@@ -177,5 +210,5 @@ func _pull(attack: GravityAttack,delta: float) -> void:
 	query.collision_mask = 4
 	for result in character.get_world_2d().direct_space_state.intersect_shape(query):
 		var target: Node = result.collider
-		if target.has_method("apply_gravity_pull") and _clear_sight(target.global_position):
+		if target.has_method("apply_gravity_pull") and _clear_sight(_target_point(target)):
 			target.apply_gravity_pull(center,delta*attack.pull_strength)

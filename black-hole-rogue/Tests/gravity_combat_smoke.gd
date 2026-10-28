@@ -47,6 +47,9 @@ func run() -> void:
 	game = load("res://Scenes/game.tscn").instantiate()
 	root.add_child(game)
 	current_scene = game
+	# These regressions isolate the player/dummy; enemy interaction has its own suite.
+	for enemy in get_nodes_in_group("crystal_enemies"):
+		enemy.queue_free()
 	player = game.get_node("Player")
 	dummy = game.get_node("TrainingDummy")
 	combat = player.combat

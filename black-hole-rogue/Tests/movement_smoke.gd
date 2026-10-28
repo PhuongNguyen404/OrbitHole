@@ -40,8 +40,31 @@ func run() -> void:
 	var game = load("res://Scenes/game.tscn").instantiate()
 	root.add_child(game)
 	current_scene = game
+	# These regressions isolate the player/dummy; enemy interaction has its own suite.
+	for enemy in get_nodes_in_group("crystal_enemies"):
+		enemy.queue_free()
 	player = game.get_node("Player")
 	await frames(4)
+	# Native input matching catches incompatible serialized device IDs that direct
+	# Input.action_press fixtures deliberately bypass during physics checks.
+	var bindings := {"move_left":65,"move_right":68,"jump":32,"sprint":4194325,"dash":74,"attack":75}
+	for action in bindings:
+		var matched := true
+		for device in [0,16]:
+			var key := InputEventKey.new()
+			key.device = device
+			key.physical_keycode = bindings[action]
+			key.pressed = true
+			matched = matched and InputMap.event_is_action(key,action)
+		check(matched,"physical keyboard binding works across device IDs: "+action)
+	var mouse_matched := true
+	for device in [0,32]:
+		var mouse := InputEventMouseButton.new()
+		mouse.device = device
+		mouse.button_index = MOUSE_BUTTON_LEFT
+		mouse.pressed = true
+		mouse_matched = mouse_matched and InputMap.event_is_action(mouse,&"attack")
+	check(mouse_matched,"left mouse attack works across device IDs")
 	check(player.is_on_floor() and absf(player.position.y-448) < 1,"spawn stands on solid ground")
 	check(player.scale == Vector2.ONE,"collision parent is unscaled")
 	check(game.get_node("Platforms") is TileMapLayer,"platforms use TileMapLayer")

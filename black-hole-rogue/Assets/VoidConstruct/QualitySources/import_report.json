@@ -1,0 +1,235 @@
+{
+	"airborne_smash": {
+		"durations": [
+			0.6,
+			1.3,
+			0.45,
+			1.2,
+			0.9,
+			0.65
+		],
+		"fps": 18.0,
+		"frames": [
+			"res://Assets/VoidConstruct/Frames/airborne_smash_00.png",
+			"res://Assets/VoidConstruct/Frames/airborne_smash_01.png",
+			"res://Assets/VoidConstruct/Frames/airborne_smash_02.png",
+			"res://Assets/VoidConstruct/Frames/airborne_smash_03.png",
+			"res://Assets/VoidConstruct/Frames/airborne_smash_04.png",
+			"res://Assets/VoidConstruct/Frames/airborne_smash_05.png"
+		],
+		"source_height": 425.0
+	},
+	"dash": {
+		"durations": [
+			1.1,
+			0.55,
+			0.7,
+			0.75,
+			0.9,
+			1.0
+		],
+		"fps": 14.0,
+		"frames": [
+			"res://Assets/VoidConstruct/Frames/dash_00.png",
+			"res://Assets/VoidConstruct/Frames/dash_01.png",
+			"res://Assets/VoidConstruct/Frames/dash_02.png",
+			"res://Assets/VoidConstruct/Frames/dash_03.png",
+			"res://Assets/VoidConstruct/Frames/dash_04.png",
+			"res://Assets/VoidConstruct/Frames/dash_05.png"
+		],
+		"source_height": 412.0
+	},
+	"dash_attack": {
+		"durations": [
+			0.5,
+			1.0,
+			0.6,
+			1.0,
+			1.1,
+			0.8
+		],
+		"fps": 18.0,
+		"frames": [
+			"res://Assets/VoidConstruct/Frames/dash_attack_00.png",
+			"res://Assets/VoidConstruct/Frames/dash_attack_01.png",
+			"res://Assets/VoidConstruct/Frames/dash_attack_02.png",
+			"res://Assets/VoidConstruct/Frames/dash_attack_03.png",
+			"res://Assets/VoidConstruct/Frames/dash_attack_04.png",
+			"res://Assets/VoidConstruct/Frames/dash_attack_05.png"
+		],
+		"source_height": 371.0
+	},
+	"fall": {
+		"durations": [
+			0.75,
+			0.9,
+			1.15,
+			1.1
+		],
+		"fps": 8.0,
+		"preserved_textures": [
+			"res://Assets/VoidConstruct/Frames/fall_00.png",
+			"res://Assets/VoidConstruct/Frames/fall_01.png",
+			"res://Assets/VoidConstruct/Frames/fall_02.png",
+			"res://Assets/VoidConstruct/Frames/fall_03.png"
+		]
+	},
+	"gravity_jab": {
+		"durations": [
+			0.6,
+			1.25,
+			0.65,
+			0.35,
+			1.1,
+			1.15,
+			0.7
+		],
+		"fps": 18.0,
+		"frames": [
+			"res://Assets/VoidConstruct/Frames/gravity_jab_00.png",
+			"res://Assets/VoidConstruct/Frames/gravity_jab_01.png",
+			"res://Assets/VoidConstruct/Frames/gravity_jab_02.png",
+			"res://Assets/VoidConstruct/Frames/gravity_jab_03.png",
+			"res://Assets/VoidConstruct/Frames/gravity_jab_04.png",
+			"res://Assets/VoidConstruct/Frames/gravity_jab_05.png",
+			"res://Assets/VoidConstruct/Frames/gravity_jab_06.png"
+		],
+		"source_height": 837.0
+	},
+	"jump": {
+		"durations": [
+			0.7,
+			0.65,
+			1.2,
+			1.45
+		],
+		"fps": 10.0,
+		"preserved_textures": [
+			"res://Assets/VoidConstruct/Frames/jump_00.png",
+			"res://Assets/VoidConstruct/Frames/jump_01.png",
+			"res://Assets/VoidConstruct/Frames/jump_02.png",
+			"res://Assets/VoidConstruct/Frames/jump_03.png"
+		]
+	},
+	"landing": {
+		"durations": [
+			0.5,
+			0.9,
+			0.7,
+			0.7
+		],
+		"fps": 16.0,
+		"preserved_textures": [
+			"res://Assets/VoidConstruct/Frames/fall_03.png",
+			"res://Assets/VoidConstruct/Frames/jump_00.png",
+			"res://Assets/VoidConstruct/Frames/fall_02.png",
+			"res://Assets/VoidConstruct/Frames/idle_00.png"
+		]
+	},
+	"repulsion_sweep": {
+		"durations": [
+			0.7,
+			1.25,
+			0.65,
+			1.0,
+			1.15,
+			0.75
+		],
+		"fps": 18.0,
+		"frames": [
+			"res://Assets/VoidConstruct/Frames/repulsion_sweep_00.png",
+			"res://Assets/VoidConstruct/Frames/repulsion_sweep_01.png",
+			"res://Assets/VoidConstruct/Frames/repulsion_sweep_02.png",
+			"res://Assets/VoidConstruct/Frames/repulsion_sweep_03.png",
+			"res://Assets/VoidConstruct/Frames/repulsion_sweep_04.png",
+			"res://Assets/VoidConstruct/Frames/repulsion_sweep_05.png"
+		],
+		"source_height": 409.0
+	},
+	"run": {
+		"durations": [
+			1.15,
+			0.8,
+			1.0,
+			0.85,
+			1.15,
+			0.8,
+			1.0,
+			0.85
+		],
+		"fps": 20.0,
+		"preserved_textures": [
+			"res://Assets/VoidConstruct/Frames/run_00.png",
+			"res://Assets/VoidConstruct/Frames/run_01.png",
+			"res://Assets/VoidConstruct/Frames/run_02.png",
+			"res://Assets/VoidConstruct/Frames/run_03.png",
+			"res://Assets/VoidConstruct/Frames/run_04.png",
+			"res://Assets/VoidConstruct/Frames/run_05.png",
+			"res://Assets/VoidConstruct/Frames/run_06.png",
+			"res://Assets/VoidConstruct/Frames/run_07.png"
+		]
+	},
+	"singularity_headbutt": {
+		"durations": [
+			0.75,
+			1.6,
+			0.4,
+			1.0,
+			1.4,
+			0.85
+		],
+		"fps": 18.0,
+		"frames": [
+			"res://Assets/VoidConstruct/Frames/singularity_headbutt_00.png",
+			"res://Assets/VoidConstruct/Frames/singularity_headbutt_01.png",
+			"res://Assets/VoidConstruct/Frames/singularity_headbutt_02.png",
+			"res://Assets/VoidConstruct/Frames/singularity_headbutt_03.png",
+			"res://Assets/VoidConstruct/Frames/singularity_headbutt_04.png",
+			"res://Assets/VoidConstruct/Frames/singularity_headbutt_05.png"
+		],
+		"source_height": 385.0
+	},
+	"sprint": {
+		"durations": [
+			1.15,
+			0.8,
+			1.0,
+			0.85,
+			1.15,
+			0.8,
+			1.0,
+			0.85
+		],
+		"fps": 28.0,
+		"preserved_textures": [
+			"res://Assets/VoidConstruct/Frames/run_00.png",
+			"res://Assets/VoidConstruct/Frames/run_01.png",
+			"res://Assets/VoidConstruct/Frames/run_02.png",
+			"res://Assets/VoidConstruct/Frames/run_03.png",
+			"res://Assets/VoidConstruct/Frames/run_04.png",
+			"res://Assets/VoidConstruct/Frames/run_05.png",
+			"res://Assets/VoidConstruct/Frames/run_06.png",
+			"res://Assets/VoidConstruct/Frames/run_07.png"
+		]
+	},
+	"sprint_attack": {
+		"durations": [
+			0.5,
+			1.0,
+			0.6,
+			1.0,
+			1.1,
+			0.8
+		],
+		"fps": 18.0,
+		"frames": [
+			"res://Assets/VoidConstruct/Frames/sprint_attack_00.png",
+			"res://Assets/VoidConstruct/Frames/sprint_attack_01.png",
+			"res://Assets/VoidConstruct/Frames/sprint_attack_02.png",
+			"res://Assets/VoidConstruct/Frames/sprint_attack_03.png",
+			"res://Assets/VoidConstruct/Frames/sprint_attack_04.png",
+			"res://Assets/VoidConstruct/Frames/sprint_attack_05.png"
+		],
+		"source_height": 359.0
+	}
+}
