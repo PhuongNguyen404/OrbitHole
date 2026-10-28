@@ -1,5 +1,7 @@
 extends Node2D
 ## All platform edges and collision are on a 16-pixel grid.
+var combo_readout: Label
+
 const PLATFORMS := [Rect2i(0,448,896,128), Rect2i(1040,448,1264,128), Rect2i(336,352,144,16), Rect2i(576,272,128,16), Rect2i(1200,336,160,16)]
 
 func _ready() -> void:
@@ -7,7 +9,7 @@ func _ready() -> void:
 	_build_tiles()
 	_build_hud()
 	var core = preload("res://Scripts/practice_core.gd").new()
-	core.position = Vector2(760,398)
+	core.position = Vector2(264,413)
 	add_child(core)
 	queue_redraw()
 
@@ -66,11 +68,25 @@ func _build_hud() -> void:
 	var panel := ColorRect.new()
 	panel.color = Color(0.045,0.03,0.08,0.91)
 	panel.position = Vector2(20,18)
-	panel.size = Vector2(700,118)
+	panel.size = Vector2(740,140)
 	canvas.add_child(panel)
 	var label := Label.new()
 	label.position = Vector2(36,26)
-	label.text = "O R B I T B R E A K   /   VOID CONSTRUCT\nA / D  MOVE     SPACE  JUMP     SHIFT  SPRINT     J  DASH\nK / LEFT CLICK  PUNCH → PUNCH → KICK   •   tap to chain\nHold SPACE for higher jumps  /  falls reset automatically"
+	label.text = "O R B I T B R E A K   /   VOID CONSTRUCT\nA / D  MOVE     SPACE  JUMP     SHIFT  SPRINT     J  DASH\nK / LEFT CLICK  JAB → SWEEP → REVERSAL → HEADBUTT\nTap during a move to queue the next  •  hold SPACE for height"
 	label.add_theme_font_size_override("font_size",16)
 	label.add_theme_color_override("font_color",Color("e5d4ff"))
 	canvas.add_child(label)
+	combo_readout = Label.new()
+	combo_readout.position = Vector2(36,123)
+	combo_readout.add_theme_font_size_override("font_size",14)
+	combo_readout.add_theme_color_override("font_color",Color("ca94eb"))
+	canvas.add_child(combo_readout)
+
+func _process(_delta: float) -> void:
+	if combo_readout==null:
+		return
+	var combat: Node = $Player/Combat
+	if combat.attacking:
+		combo_readout.text = "%02d  /  %s%s" % [combat.stage+1,combat.attacks[combat.stage].title,"  •  NEXT QUEUED" if combat.queued else ""]
+	else:
+		combo_readout.text = "VOID DUMMY  •  train the four-hit sequence"
